@@ -47,18 +47,6 @@
             margin: 20px 0;
         }
 
-        img {
-            margin-top: 30px;
-            width: 300px;
-            border-radius: 30px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-            transition: transform 0.3s ease;
-        }
-
-        img:hover {
-            transform: scale(1.05);
-        }
-
         .play-button {
             background: linear-gradient(135deg, #ff4081, #f06292);
             color: white;
@@ -92,7 +80,7 @@
 
         /* Колесо желаний */
         .wheel-container {
-            margin-top: 50px;
+            margin-top: 40px;
             position: relative;
             width: 300px;
             height: 300px;
@@ -181,23 +169,7 @@
         <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
         ТЫ одна такая на этот мир, сияй  ✨</p>
         <p> ТЫ самая-самая во всех смыслах 🌟</p>
-        
-        <!-- Ваше фото -->
-        <img src="foto.jpg" alt="Твоё фото">
-        
-        <br>
-        
-        <!-- Видео с YouTube -->
-        <div style="margin-top: 40px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        </div>
 
-        <!-- Кнопка воспроизведения песни -->
-        <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
-        
         <!-- Колесо желаний -->
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
@@ -206,6 +178,8 @@
 
         <div class="message" id="message"></div>
 
+        <!-- Кнопка воспроизведения песни -->
+        <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
     </div>
 
     <!-- Аудио -->
