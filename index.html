@@ -12,7 +12,8 @@
 
         body {
             font-family: 'Pacifico', cursive;
-            background: radial-gradient(circle, rgba(255, 238, 248, 0.8), rgba(255, 207, 224, 0.8));
+            background: url('foto.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #6a1b9a;
             text-align: center;
             margin: 0;
@@ -31,6 +32,8 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
         }
 
         h1 {
@@ -42,43 +45,6 @@
         p {
             font-size: 26px;
             margin: 20px 0;
-        }
-
-        .play-button {
-            background: linear-gradient(135deg, #ff4081, #f06292);
-            color: white;
-            font-size: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin: 20px auto;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-            display: inline-block;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ec407a, #d81b60);
-        }
-
-        .wheel-button {
-            background: #ba68c8;
-            color: white;
-            font-size: 18px;
-            padding: 10px 24px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 30px;
-            float: right;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .wheel {
-            font-size: 24px;
-            margin-top: 30px;
-            min-height: 60px;
         }
 
         footer {
@@ -93,6 +59,59 @@
 
         .emoji {
             font-size: 36px;
+        }
+
+        /* Колесо желаний */
+        .wheel-container {
+            margin-top: 40px;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #ec407a;
+            overflow: hidden;
+            background: radial-gradient(circle, #ff4081, #f06292);
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url('wheel.png') no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            transition: transform 4s ease-out;
+        }
+
+        .wheel-btn {
+            font-size: 24px;
+            background-color: #ff4081;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .wheel-btn:hover {
+            background-color: #d81b60;
+        }
+
+        .message {
+            font-size: 24px;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #ec407a;
         }
 
         .confetti {
@@ -110,130 +129,160 @@
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
+
+        iframe {
+            margin-top: 40px;
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, #ff4081, #f06292);
+            color: white;
+            font-size: 20px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(135deg, #ec407a, #d81b60);
+        }
     </style>
 </head>
 <body>
 
-<!-- Конфетти -->
-<script>
-    for (let i = 0; i < 100; i++) {
-        let confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
-        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        document.body.appendChild(confetti);
-    }
-</script>
-
-<div class="container">
-    <button class="play-button" onclick="toggleSong()">▶ Начать поздравление</button>
-
-    <div class="emoji">🎉🎂🎈</div>
-    <h1>С Днём Рождения, Принцесса!</h1>
-    <p>Дорогая Алина!</p>
-    <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
-        ТЫ одна такая на этот мир, сияй ✨</p>
-    <p>ТЫ самая-самая во всех смыслах 🌟</p>
-
-    <!-- Колесо желаний -->
-    <div class="wheel" id="wishDisplay">✨ Нажми, чтобы получить пожелание! ✨</div>
-    <button class="wheel-button" onclick="spinWish()">🎁 Колесо желаний</button>
-
-    <!-- Видео -->
-    <div style="margin-top: 80px;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-    </div>
-</div>
-
-<!-- Аудио -->
-<audio id="song" preload="auto" autoplay>
-    <source src="song.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает воспроизведение аудио.
-</audio>
-
-<footer>
-    С любовью твое чудовище 💖
-</footer>
-
-<!-- Пожелания -->
-<script>
-    const wishes = [
-        "Пусть каждый день будет наполнен улыбками! 😊",
-        "Желаю исполнения самых заветных мечт! 🌠",
-        "Пусть сердце будет полным любви! 💖",
-        "Здоровья, счастья и настоящих чудес! ✨",
-        "Ты особенная — никогда не забывай это! 🌸",
-        "Всё задуманное обязательно сбудется! 🎯",
-        "Смеха, вдохновения и настоящих друзей! 🥳"
-    ];
-
-    function spinWish() {
-        const wishDisplay = document.getElementById('wishDisplay');
-        const randomWish = wishes[Math.floor(Math.random() * wishes.length)];
-        wishDisplay.innerText = randomWish;
-    }
-
-    function toggleSong() {
-        var song = document.getElementById('song');
-        var btn = document.querySelector('.play-button');
-        if (song.paused) {
-            song.play();
-            btn.innerHTML = "❚❚ Остановить песню";
-        } else {
-            song.pause();
-            btn.innerHTML = "▶ Начать поздравление";
+    <script>
+        for (let i = 0; i < 100; i++) {
+            let confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(confetti);
         }
-    }
-</script>
+    </script>
 
-<!-- Шарики -->
-<script>
-    for (let i = 0; i < 20; i++) {
-        let balloon = document.createElement('div');
-        balloon.style.position = 'fixed';
-        balloon.style.left = Math.random() * 100 + 'vw';
-        balloon.style.bottom = '-100px';
-        balloon.style.width = '40px';
-        balloon.style.height = '50px';
-        balloon.style.backgroundColor = ['#f06292', '#ffd54f', '#81d4fa', '#a5d6a7'][Math.floor(Math.random() * 4)];
-        balloon.style.borderRadius = '50%';
-        balloon.style.zIndex = '0';
-        balloon.style.animation = 'rise ' + (Math.random() * 5 + 5) + 's ease-in infinite';
-        balloon.style.opacity = 0.8;
-        document.body.appendChild(balloon);
-    }
+    <div class="container">
+        <!-- Кнопка управления песней -->
+        <button class="play-button" onclick="toggleSong()">❚❚ Остановить песню</button>
 
-    const style = document.createElement('style');
-    style.innerHTML =
-        `@keyframes rise {
-            0% { bottom: -100px; transform: translateX(0); }
-            100% { bottom: 100vh; transform: translateX(50px); }
-        }`;
-    document.head.appendChild(style);
-</script>
+        <div class="emoji">🎉🎂🎈</div>
+        <h1>С Днём Рождения, Принцесса!</h1>
+        <p>Дорогая Алина!</p>
+        <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
+        ТЫ одна такая на этот мир, сияй ✨</p>
+        <p>ТЫ самая-самая во всех смыслах 🌟</p>
 
-<!-- Фейерверки -->
-<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
-<script>
-    const container = document.body;
-    const fireworks = new Fireworks.default(container, {
-        rocketsPoint: { min: 0, max: 100 },
-        hue: { min: 0, max: 360 },
-        delay: { min: 15, max: 30 },
-        speed: 2,
-        acceleration: 1.05,
-        friction: 0.97,
-        gravity: 1.5,
-        particles: 80,
-        trace: 3,
-        explosion: 5
-    });
-    fireworks.start();
-</script>
+        <!-- Колесо желаний -->
+        <div class="wheel-container">
+            <div class="wheel" id="wheel"></div>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
+        </div>
+
+        <div class="message" id="message"></div>
+
+        <!-- Видео -->
+        <div style="margin-top: 40px;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <!-- Аудио -->
+    <audio id="song" preload="auto" autoplay loop>
+        <source src="song.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
+
+    <footer>
+        С любовью твое чудовище 💖
+    </footer>
+
+    <!-- Шарики -->
+    <script>
+        for (let i = 0; i < 20; i++) {
+            let balloon = document.createElement('div');
+            balloon.style.position = 'fixed';
+            balloon.style.left = Math.random() * 100 + 'vw';
+            balloon.style.bottom = '-100px';
+            balloon.style.width = '40px';
+            balloon.style.height = '50px';
+            balloon.style.backgroundColor = ['#f06292', '#ffd54f', '#81d4fa', '#a5d6a7'][Math.floor(Math.random() * 4)];
+            balloon.style.borderRadius = '50%';
+            balloon.style.zIndex = '0';
+            balloon.style.animation = 'rise ' + (Math.random() * 5 + 5) + 's ease-in infinite';
+            balloon.style.opacity = 0.8;
+            document.body.appendChild(balloon);
+        }
+
+        const style = document.createElement('style');
+        style.innerHTML =
+            `@keyframes rise {
+                0% { bottom: -100px; transform: translateX(0); }
+                100% { bottom: 100vh; transform: translateX(50px); }
+            }`;
+        document.head.appendChild(style);
+    </script>
+
+    <!-- Фейерверки -->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
+    <script>
+        const container = document.body;
+        const fireworks = new Fireworks.default(container, {
+            rocketsPoint: { min: 0, max: 100 },
+            hue: { min: 0, max: 360 },
+            delay: { min: 15, max: 30 },
+            speed: 2,
+            acceleration: 1.05,
+            friction: 0.97,
+            gravity: 1.5,
+            particles: 80,
+            trace: 3,
+            explosion: 5
+        });
+        fireworks.start();
+    </script>
+
+    <script>
+        function toggleSong() {
+            var song = document.getElementById('song');
+            if (song.paused) {
+                song.play();
+                document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
+            } else {
+                song.pause();
+                document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
+            }
+        }
+
+        const wishes = [
+            "Счастья и удачи во всем!",
+            "Пусть каждый день будет ярким и незабываемым!",
+            "Смейся чаще, люби искренне и живи с удовольствием!",
+            "Здоровья тебе и твоим близким!",
+            "Ты заслуживаешь только лучшего, пусть так и будет!",
+            "Пусть твоя жизнь будет как сказка!"
+        ];
+
+        function spinWheel() {
+            const wheel = document.getElementById('wheel');
+            const message = document.getElementById('message');
+            const randomRotation = Math.floor(Math.random() * 360) + 720;
+            wheel.style.transform = `rotate(${randomRotation}deg)`;
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * wishes.length);
+                message.innerText = wishes[randomIndex];
+            }, 4000);
+        }
+    </script>
 
 </body>
 </html>
