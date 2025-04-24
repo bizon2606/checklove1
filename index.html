@@ -12,8 +12,8 @@
 
         body {
             font-family: 'Pacifico', cursive;
-            background: url('foto.jpg') no-repeat center center fixed; /* Ваше фото как фон */
-            background-size: cover; /* Это заставит изображение полностью покрывать экран */
+            background: url('foto.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #6a1b9a;
             text-align: center;
             margin: 0;
@@ -32,7 +32,7 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
-            background-color: rgba(255, 255, 255, 0.8); /* Прозрачный фон для улучшения читаемости */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
         }
 
@@ -90,6 +90,59 @@
             font-size: 36px;
         }
 
+        /* Колесо желаний */
+        .wheel-container {
+            margin-top: 50px;
+            position: relative;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            border: 10px solid #ec407a;
+            overflow: hidden;
+            background: radial-gradient(circle, #ff4081, #f06292);
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url('wheel.png') no-repeat center center;
+            background-size: cover;
+            position: absolute;
+            transition: transform 4s ease-out;
+        }
+
+        .wheel-btn {
+            font-size: 24px;
+            background-color: #ff4081;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            position: absolute;
+            bottom: 20px;
+            transform: translateX(-50%);
+        }
+
+        .wheel-btn:hover {
+            background-color: #d81b60;
+        }
+
+        .message {
+            font-size: 24px;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #ec407a;
+        }
+
+        /* Прочее оформление */
         .confetti {
             position: fixed;
             width: 10px;
@@ -144,6 +197,15 @@
 
         <!-- Кнопка воспроизведения песни -->
         <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
+        
+        <!-- Колесо желаний -->
+        <div class="wheel-container">
+            <div class="wheel" id="wheel"></div>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо</button>
+        </div>
+
+        <div class="message" id="message"></div>
+
     </div>
 
     <!-- Аудио -->
@@ -213,6 +275,31 @@
             song.pause();
             document.querySelector('.play-button').innerHTML = "▶ Воспроизвести песню";
         }
+    }
+
+    // Колесо желаний
+    const wishes = [
+        "Счастья и удачи во всем!",
+        "Пусть каждый день будет ярким и незабываемым!",
+        "Смейся чаще, люби искренне и живи с удовольствием!",
+        "Здоровья тебе и твоим близким!",
+        "Ты заслуживаешь только лучшего, пусть так и будет!",
+        "Пусть твоя жизнь будет как сказка!"
+    ];
+
+    function spinWheel() {
+        const wheel = document.getElementById('wheel');
+        const message = document.getElementById('message');
+        const randomRotation = Math.floor(Math.random() * 360) + 720; // Минимум 2 полных оборота
+
+        // Вращение колеса
+        wheel.style.transform = `rotate(${randomRotation}deg)`;
+
+        // Показ случайного пожелания
+        setTimeout(() => {
+            const randomIndex = Math.floor(Math.random() * wishes.length);
+            message.innerText = wishes[randomIndex];
+        }, 4000); // Задержка для завершения вращения
     }
 </script>
 
