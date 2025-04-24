@@ -128,19 +128,25 @@
         <p>Желаю тебе океан радости, горы счастья и бескрайнее небо вдохновения!<br>
         Пусть сбудется всё, что задумано, и каждый день будет волшебным! ✨</p>
         <p>Ты — сияющая звезда, и этот день твой! 🌟</p>
-        <img src="birthday-cake.jpg" alt="Торт ко дню рождения">
+        
+        <!-- Ваше фото -->
+        <img src="foto.jpg" alt="Твоё фото">
+        
         <br>
         
-<div style="margin-top: 40px;">
-    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=rnjbemXGNmwautoplay=1&mute=1"
-        title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-</div>
+        <!-- Видео с YouTube -->
+        <div style="margin-top: 40px;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
 
+        <!-- Кнопка воспроизведения песни -->
         <button class="play-button" onclick="document.getElementById('song').play()">▶ Воспроизвести песню</button>
     </div>
 
+    <!-- Аудио -->
     <audio id="song" autoplay>
         <source src="music.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
@@ -196,5 +202,4 @@
     fireworks.start();
 </script>
 </body>
-
 </html>
