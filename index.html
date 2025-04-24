@@ -47,23 +47,6 @@
             margin: 20px 0;
         }
 
-        .play-button {
-            background: linear-gradient(135deg, #ff4081, #f06292);
-            color: white;
-            font-size: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ec407a, #d81b60);
-        }
-
         footer {
             margin-top: auto;
             padding: 25px;
@@ -116,6 +99,7 @@
             z-index: 10;
             position: absolute;
             bottom: 20px;
+            left: 50%;
             transform: translateX(-50%);
         }
 
@@ -146,6 +130,36 @@
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
+
+        /* Видео */
+        iframe {
+            margin-top: 40px;
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+
+        /* Кнопка воспроизведения песни */
+        .play-button {
+            background: linear-gradient(135deg, #ff4081, #f06292);
+            color: white;
+            font-size: 20px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(135deg, #ec407a, #d81b60);
+        }
+
     </style>
 </head>
 <body>
@@ -178,8 +192,13 @@
 
         <div class="message" id="message"></div>
 
-        <!-- Кнопка воспроизведения песни -->
-        <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
+        <!-- Видео с YouTube -->
+        <div style="margin-top: 40px;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
     </div>
 
     <!-- Аудио -->
