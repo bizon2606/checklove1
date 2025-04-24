@@ -6,7 +6,9 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Pacifico', cursive;
@@ -30,8 +32,8 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 30px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
         }
 
         h1 {
@@ -67,7 +69,9 @@
             border-top-right-radius: 20px;
         }
 
-        .emoji { font-size: 36px; }
+        .emoji {
+            font-size: 36px;
+        }
 
         .confetti {
             position: fixed;
@@ -84,48 +88,76 @@
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            p {
+                font-size: 20px;
+            }
+
+            img {
+                width: 80%;
+            }
+
+            iframe {
+                width: 100%;
+                height: auto;
+            }
+        }
     </style>
 </head>
 <body>
 
-<!-- Конфетти -->
-<script>
-    for (let i = 0; i < 100; i++) {
-        let confetti = document.createElement('div');
-        confetti.className = 'confetti';
-        confetti.style.left = Math.random() * 100 + 'vw';
-        confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
-        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-        document.body.appendChild(confetti);
-    }
-</script>
+    <!-- Конфетти -->
+    <script>
+        for (let i = 0; i < 100; i++) {
+            let confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
+            confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(confetti);
+        }
+    </script>
 
-<div class="container">
-    <div class="emoji">🎉🎂🎈</div>
-    <h1>С Днём Рождения, Принцесса!</h1>
-    <p>Дорогая Алина!</p>
-    <p>Желаю тебе море счастья, оставайся такой, какая ты есть!<br>
-        ТЫ одна такая на этот мир, сияй ✨</p>
-    <p>ТЫ самая-самая во всех смыслах 🌟</p>
+    <div class="container">
+        <div class="emoji">🎉🎂🎈</div>
+        <h1>С Днём Рождения, Принцесса!</h1>
+        <p>Дорогая Алина!</p>
+        <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
+        ТЫ одна такая на этот мир, сияй  ✨</p>
+        <p> ТЫ самая-самая во всех смыслах 🌟</p>
 
-    <!-- Видео YouTube по клику -->
-    <div style="margin-top: 40px;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/T3FQxH2fz9M"
-            title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+        <!-- Ваше фото -->
+        <img src="foto.jpg" alt="Твоё фото">
+
+        <br>
+
+        <!-- Видео с YouTube -->
+        <div style="margin-top: 40px;">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
     </div>
-</div>
 
-<!-- Аудио с автозапуском -->
-<audio id="song" autoplay preload="auto">
-    <source src="song.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает воспроизведение аудио.
-</audio>
+    <!-- Аудио -->
+    <audio id="song" preload="auto" autoplay>
+        <source src="song.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
 
-<footer>
-    С любовью, твоё чудовище 💖
-</footer>
+    <footer>
+        С любовью твое Чудовище 💖
+    </footer>
 
 <!-- Шарики -->
 <script>
@@ -171,21 +203,6 @@
         explosion: 5
     });
     fireworks.start();
-</script>
-
-<!-- Скрипт для автозапуска аудио -->
-<script>
-    window.addEventListener("DOMContentLoaded", function () {
-        const song = document.getElementById("song");
-        const playPromise = song.play();
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                console.log("Музыка играет 🎶");
-            }).catch(() => {
-                console.log("Автовоспроизведение заблокировано.");
-            });
-        }
-    });
 </script>
 
 </body>
