@@ -6,13 +6,12 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
+        * { box-sizing: border-box; }
 
         body {
             font-family: 'Pacifico', cursive;
-            background: radial-gradient(circle, rgba(255, 238, 248, 0.8), rgba(255, 207, 224, 0.8));
+            background: url('foto.jpg') no-repeat center center fixed;
+            background-size: cover;
             color: #6a1b9a;
             text-align: center;
             margin: 0;
@@ -24,30 +23,29 @@
         }
 
         .container {
-            margin-top: 60px;
-            padding: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 1;
-            position: relative;
+            margin: 40px 20px;
+            padding: 30px;
+            max-width: 100%;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 20px;
         }
 
         h1 {
-            font-size: 56px;
+            font-size: 8vw;
             color: #ec407a;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 26px;
-            margin: 20px 0;
+            font-size: 5vw;
+            margin: 15px 0;
         }
 
         img {
-            margin-top: 30px;
-            width: 300px;
-            border-radius: 30px;
+            margin-top: 20px;
+            width: 80%;
+            max-width: 300px;
+            border-radius: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
         }
@@ -56,36 +54,17 @@
             transform: scale(1.05);
         }
 
-        .play-button {
-            background: linear-gradient(135deg, #ff4081, #f06292);
-            color: white;
-            font-size: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 30px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ec407a, #d81b60);
-        }
-
         footer {
             margin-top: auto;
-            padding: 25px;
+            padding: 15px;
             background-color: #ec407a;
             color: white;
-            font-size: 20px;
+            font-size: 4.5vw;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
 
-        .emoji {
-            font-size: 36px;
-        }
+        .emoji { font-size: 7vw; }
 
         .confetti {
             position: fixed;
@@ -102,58 +81,54 @@
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
+
+        iframe {
+            width: 100%;
+            max-width: 560px;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            margin-top: 30px;
+        }
     </style>
 </head>
 <body>
 
-    <!-- Конфетти -->
-    <script>
-        for (let i = 0; i < 100; i++) {
-            let confetti = document.createElement('div');
-            confetti.className = 'confetti';
-            confetti.style.left = Math.random() * 100 + 'vw';
-            confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
-            confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.body.appendChild(confetti);
-        }
-    </script>
+<script>
+    for (let i = 0; i < 100; i++) {
+        let confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + 'vw';
+        confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
+        confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+        document.body.appendChild(confetti);
+    }
+</script>
 
-    <div class="container">
-        <div class="emoji">🎉🎂🎈</div>
-        <h1>С Днём Рождения, Принцесса!</h1>
-        <p>Дорогая Алина!</p>
-        <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
-        ТЫ одна такая на этот мир, сияй  ✨</p>
-        <p> ТЫ самая-самая во всех смыслах 🌟</p>
-        
-        <!-- Ваше фото -->
-        <img src="foto.jpg" alt="Твоё фото">
-        
-        <br>
-        
-        <!-- Видео с YouTube -->
-        <div style="margin-top: 40px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
-        </div>
+<div class="container">
+    <div class="emoji">🎉🎂🎈</div>
+    <h1>С Днём Рождения, Принцесса!</h1>
+    <p>Дорогая Алина!</p>
+    <p>Желаю тебе море счастья, оставайся такой, какая ты есть!<br>
+        ТЫ одна такая на этот мир, сияй ✨</p>
+    <p>ТЫ самая-самая во всех смыслах 🌟</p>
 
-        <!-- Кнопка воспроизведения песни -->
-        <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
-    </div>
+    <img src="foto.jpg" alt="Твоё фото">
 
-    <!-- Аудио -->
-    <audio id="song" preload="auto">
-        <source src="song.mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает воспроизведение аудио.
-    </audio>
+    <iframe src="https://www.youtube.com/embed/T3FQxH2fz9M"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen></iframe>
+</div>
 
-    <footer>
-        С любовью твое чудовище 💖
-    </footer>
+<audio id="song" autoplay preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+    Ваш браузер не поддерживает воспроизведение аудио.
+</audio>
 
-<!-- Шарики -->
+<footer>
+    С любовью, твоё чудовище 💖
+</footer>
+
 <script>
     for (let i = 0; i < 20; i++) {
         let balloon = document.createElement('div');
@@ -180,7 +155,6 @@
     document.head.appendChild(style);
 </script>
 
-<!-- Фейерверки -->
 <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
 <script>
     const container = document.body;
@@ -200,17 +174,17 @@
 </script>
 
 <script>
-    // Функция для воспроизведения/остановки песни
-    function toggleSong() {
-        var song = document.getElementById('song');
-        if (song.paused) {
-            song.play();
-            document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
-        } else {
-            song.pause();
-            document.querySelector('.play-button').innerHTML = "▶ Воспроизвести песню";
+    window.addEventListener("DOMContentLoaded", function () {
+        const song = document.getElementById("song");
+        const playPromise = song.play();
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Музыка играет 🎶");
+            }).catch(() => {
+                console.log("Автовоспроизведение заблокировано.");
+            });
         }
-    }
+    });
 </script>
 
 </body>
