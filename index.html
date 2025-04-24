@@ -148,12 +148,13 @@
             border: none;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 30px;
+            margin-top: 20px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
             transition: background 0.3s;
             position: fixed;
-            bottom: 50px;
-            right: 50px;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .play-button:hover {
@@ -163,6 +164,9 @@
     </style>
 </head>
 <body>
+
+    <!-- Кнопка воспроизведения/остановки песни -->
+    <button class="play-button" onclick="toggleSong()">▶ Воспроизвести песню</button>
 
     <!-- Конфетти -->
     <script>
@@ -187,7 +191,7 @@
         <!-- Колесо желаний -->
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
-            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо</button>
         </div>
 
         <div class="message" id="message"></div>
@@ -202,7 +206,7 @@
     </div>
 
     <!-- Аудио -->
-    <audio id="song" preload="auto" autoplay loop>
+    <audio id="song" preload="auto">
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
     </audio>
@@ -266,7 +270,7 @@
             document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
         } else {
             song.pause();
-            document.querySelector('.play-button').innerHTML = "▶ Воспроизвести песню";
+            document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
         }
     }
 
