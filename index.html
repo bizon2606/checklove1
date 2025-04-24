@@ -23,29 +23,32 @@
         }
 
         .container {
-            margin: 40px 20px;
-            padding: 30px;
-            max-width: 100%;
+            margin-top: 60px;
+            padding: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 1;
+            position: relative;
             background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 20px;
+            border-radius: 30px;
         }
 
         h1 {
-            font-size: 8vw;
+            font-size: 56px;
             color: #ec407a;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 5vw;
-            margin: 15px 0;
+            font-size: 26px;
+            margin: 20px 0;
         }
 
         img {
-            margin-top: 20px;
-            width: 80%;
-            max-width: 300px;
-            border-radius: 20px;
+            margin-top: 30px;
+            width: 300px;
+            border-radius: 30px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
         }
@@ -56,15 +59,15 @@
 
         footer {
             margin-top: auto;
-            padding: 15px;
+            padding: 25px;
             background-color: #ec407a;
             color: white;
-            font-size: 4.5vw;
+            font-size: 20px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
 
-        .emoji { font-size: 7vw; }
+        .emoji { font-size: 36px; }
 
         .confetti {
             position: fixed;
@@ -81,18 +84,11 @@
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
         }
-
-        iframe {
-            width: 100%;
-            max-width: 560px;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            margin-top: 30px;
-        }
     </style>
 </head>
 <body>
 
+<!-- Конфетти -->
 <script>
     for (let i = 0; i < 100; i++) {
         let confetti = document.createElement('div');
@@ -112,14 +108,16 @@
         ТЫ одна такая на этот мир, сияй ✨</p>
     <p>ТЫ самая-самая во всех смыслах 🌟</p>
 
-    <img src="foto.jpg" alt="Твоё фото">
-
-    <iframe src="https://www.youtube.com/embed/T3FQxH2fz9M"
+    <!-- Видео YouTube по клику -->
+    <div style="margin-top: 40px;">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/T3FQxH2fz9M"
             title="YouTube video player" frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen></iframe>
+    </div>
 </div>
 
+<!-- Аудио с автозапуском -->
 <audio id="song" autoplay preload="auto">
     <source src="song.mp3" type="audio/mpeg">
     Ваш браузер не поддерживает воспроизведение аудио.
@@ -129,6 +127,7 @@
     С любовью, твоё чудовище 💖
 </footer>
 
+<!-- Шарики -->
 <script>
     for (let i = 0; i < 20; i++) {
         let balloon = document.createElement('div');
@@ -155,6 +154,7 @@
     document.head.appendChild(style);
 </script>
 
+<!-- Фейерверки -->
 <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
 <script>
     const container = document.body;
@@ -173,6 +173,7 @@
     fireworks.start();
 </script>
 
+<!-- Скрипт для автозапуска аудио -->
 <script>
     window.addEventListener("DOMContentLoaded", function () {
         const song = document.getElementById("song");
