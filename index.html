@@ -12,7 +12,8 @@
 
         body {
             font-family: 'Pacifico', cursive;
-            background: radial-gradient(circle, rgba(255, 238, 248, 0.8), rgba(255, 207, 224, 0.8));
+            background: url('foto.jpg') no-repeat center center fixed; /* Ваше фото как фон */
+            background-size: cover; /* Это заставит изображение полностью покрывать экран */
             color: #6a1b9a;
             text-align: center;
             margin: 0;
@@ -31,6 +32,8 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
+            background-color: rgba(255, 255, 255, 0.8); /* Прозрачный фон для улучшения читаемости */
+            border-radius: 10px;
         }
 
         h1 {
@@ -144,13 +147,13 @@
     </div>
 
     <!-- Аудио -->
-   <audio id="song" preload="auto" autoplay>
-    <source src="song.mp3" type="audio/mpeg">
-    Ваш браузер не поддерживает воспроизведение аудио.
- </audio>
+    <audio id="song" preload="auto" autoplay>
+        <source src="song.mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
 
     <footer>
-        С любовью твое Чудовище 💖
+        С любовью твое чудовище 💖
     </footer>
 
 <!-- Шарики -->
