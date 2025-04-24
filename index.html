@@ -26,7 +26,7 @@
         .container {
             margin-top: 60px;
             background: rgba(255, 255, 255, 0.9);
-            padding: 30px 20px;
+            padding: 50px;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             max-width: 800px;
@@ -37,20 +37,19 @@
         }
 
         h1 {
-            font-size: 40px;
+            font-size: 56px;
             color: #ec407a;
             margin-bottom: 20px;
         }
 
         p {
-            font-size: 22px;
+            font-size: 26px;
             margin: 20px 0;
         }
 
         img {
             margin-top: 30px;
-            width: 90%;
-            max-width: 300px;
+            width: 300px;
             border-radius: 30px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
             transition: transform 0.3s ease;
@@ -63,8 +62,8 @@
         .play-button {
             background: linear-gradient(135deg, #ff4081, #f06292);
             color: white;
-            font-size: 18px;
-            padding: 12px 24px;
+            font-size: 20px;
+            padding: 14px 28px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
@@ -82,7 +81,7 @@
             padding: 25px;
             background-color: #ec407a;
             color: white;
-            font-size: 18px;
+            font-size: 20px;
             border-top-left-radius: 20px;
             border-top-right-radius: 20px;
         }
@@ -105,21 +104,6 @@
         @keyframes fall {
             0% { transform: translateY(-10px) rotate(0); }
             100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 32px;
-            }
-
-            p {
-                font-size: 18px;
-            }
-
-            .play-button {
-                font-size: 16px;
-                padding: 10px 20px;
-            }
         }
     </style>
 </head>
@@ -145,25 +129,18 @@
         Пусть сбудется всё, что задумано, и каждый день будет волшебным! ✨</p>
         <p>Ты — сияющая звезда, и этот день твой! 🌟</p>
         <img src="birthday-cake.jpg" alt="Торт ко дню рождения">
+        <br>
+        
+<div style="margin-top: 40px;">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Lnwj6Pkmklo?autoplay=1&mute=1"
+        title="YouTube video player" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+</div>
 
-        <!-- Видео по клику -->
-        <div style="margin-top: 30px;">
-            <div id="videoWrapper" style="position: relative; width: 100%; max-width: 560px; margin: 0 auto;">
-                <img src="https://img.youtube.com/vi/T3FQxH2fz9M/hqdefault.jpg" 
-                     alt="Видео превью" 
-                     style="width: 100%; border-radius: 20px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.2);" 
-                     onclick="playVideo()">
-                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:48px;color:white;">▶</div>
-            </div>
-        </div>
-
-        <!-- Кнопка управления песней -->
-        <div style="margin-top: 20px;">
-            <button class="play-button" id="audioToggleBtn" onclick="toggleAudio()">▶ Воспроизвести</button>
-        </div>
+        <button class="play-button" onclick="document.getElementById('song').play()">▶ Воспроизвести песню</button>
     </div>
 
-    <!-- Аудио -->
     <audio id="song" autoplay>
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
@@ -173,77 +150,51 @@
         С любовью и теплом — твой персональный праздник! 💖
     </footer>
 
-    <!-- Шарики -->
-    <script>
-        for (let i = 0; i < 20; i++) {
-            let balloon = document.createElement('div');
-            balloon.style.position = 'fixed';
-            balloon.style.left = Math.random() * 100 + 'vw';
-            balloon.style.bottom = '-100px';
-            balloon.style.width = '40px';
-            balloon.style.height = '50px';
-            balloon.style.backgroundColor = ['#f06292', '#ffd54f', '#81d4fa', '#a5d6a7'][Math.floor(Math.random() * 4)];
-            balloon.style.borderRadius = '50%';
-            balloon.style.zIndex = '0';
-            balloon.style.animation = 'rise ' + (Math.random() * 5 + 5) + 's ease-in infinite';
-            balloon.style.opacity = 0.8;
-            document.body.appendChild(balloon);
+<!-- Шарики -->
+<script>
+    for (let i = 0; i < 20; i++) {
+        let balloon = document.createElement('div');
+        balloon.style.position = 'fixed';
+        balloon.style.left = Math.random() * 100 + 'vw';
+        balloon.style.bottom = '-100px';
+        balloon.style.width = '40px';
+        balloon.style.height = '50px';
+        balloon.style.backgroundColor = ['#f06292', '#ffd54f', '#81d4fa', '#a5d6a7'][Math.floor(Math.random() * 4)];
+        balloon.style.borderRadius = '50%';
+        balloon.style.zIndex = '0';
+        balloon.style.animation = 'rise ' + (Math.random() * 5 + 5) + 's ease-in infinite';
+        balloon.style.opacity = 0.8;
+        document.body.appendChild(balloon);
+    }
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes rise {
+            0% { bottom: -100px; transform: translateX(0); }
+            100% { bottom: 100vh; transform: translateX(50px); }
         }
+    `;
+    document.head.appendChild(style);
+</script>
 
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes rise {
-                0% { bottom: -100px; transform: translateX(0); }
-                100% { bottom: 100vh; transform: translateX(50px); }
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-
-    <!-- Фейерверки -->
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
-    <script>
-        const container = document.body;
-        const fireworks = new Fireworks.default(container, {
-            rocketsPoint: { min: 0, max: 100 },
-            hue: { min: 0, max: 360 },
-            delay: { min: 15, max: 30 },
-            speed: 2,
-            acceleration: 1.05,
-            friction: 0.97,
-            gravity: 1.5,
-            particles: 80,
-            trace: 3,
-            explosion: 5
-        });
-        fireworks.start();
-
-        // Аудио управление
-        const audio = document.getElementById('song');
-        const audioBtn = document.getElementById('audioToggleBtn');
-
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-                audioBtn.innerText = "⏸ Пауза";
-            } else {
-                audio.pause();
-                audioBtn.innerText = "▶ Воспроизвести";
-            }
-        }
-
-        // Запуск видео по клику
-        function playVideo() {
-            const wrapper = document.getElementById('videoWrapper');
-            wrapper.innerHTML = `
-                <iframe width="100%" height="315" 
-                    src="https://www.youtube.com/embed/T3FQxH2fz9M?autoplay=1" 
-                    title="YouTube video player" 
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                    allowfullscreen></iframe>
-            `;
-        }
-    </script>
+<!-- Фейерверки -->
+<script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
+<script>
+    const container = document.body;
+    const fireworks = new Fireworks.default(container, {
+        rocketsPoint: { min: 0, max: 100 },
+        hue: { min: 0, max: 360 },
+        delay: { min: 15, max: 30 },
+        speed: 2,
+        acceleration: 1.05,
+        friction: 0.97,
+        gravity: 1.5,
+        particles: 80,
+        trace: 3,
+        explosion: 5
+    });
+    fireworks.start();
+</script>
 </body>
+
 </html>
