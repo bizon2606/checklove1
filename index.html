@@ -12,7 +12,7 @@
 
         body {
             font-family: 'Pacifico', cursive;
-            background: radial-gradient(circle, #ffeef8, #ffcfe0);
+            background: radial-gradient(circle, rgba(255, 238, 248, 0.8), rgba(255, 207, 224, 0.8));
             color: #6a1b9a;
             text-align: center;
             margin: 0;
@@ -25,7 +25,7 @@
 
         .container {
             margin-top: 60px;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.7); /* Сделано более прозрачным */
             padding: 50px;
             border-radius: 30px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -143,11 +143,11 @@
         </div>
 
         <!-- Кнопка воспроизведения песни -->
-        <button class="play-button" onclick="document.getElementById('song').play()">▶ Воспроизвести песню</button>
+        <button class="play-button" onclick="toggleSong()">▶ Воспроизвести/Остановить песню</button>
     </div>
 
     <!-- Аудио -->
-    <audio id="song" autoplay>
+    <audio id="song" preload="auto">
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
     </audio>
@@ -201,5 +201,20 @@
     });
     fireworks.start();
 </script>
+
+<script>
+    // Функция для воспроизведения/остановки песни
+    function toggleSong() {
+        var song = document.getElementById('song');
+        if (song.paused) {
+            song.play();
+            document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
+        } else {
+            song.pause();
+            document.querySelector('.play-button').innerHTML = "▶ Воспроизвести песню";
+        }
+    }
+</script>
+
 </body>
 </html>
