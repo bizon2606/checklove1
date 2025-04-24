@@ -40,6 +40,20 @@
             border-radius: 20px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
+        .play-button {
+            background-color: #d81b60;
+            color: white;
+            font-size: 18px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .play-button:hover {
+            background-color: #ad1457;
+        }
         footer {
             margin-top: auto;
             padding: 20px;
@@ -47,16 +61,9 @@
             color: white;
             font-size: 18px;
         }
-        audio {
-            display: none; /* скрываем, чтобы не мешал внешнему виду */
-        }
     </style>
 </head>
 <body>
-    <audio autoplay loop>
-        <source src="Record (online-voice-recorder.com) (2).mp3" type="audio/mpeg">
-        Ваш браузер не поддерживает воспроизведение аудио.
-    </audio>
 
     <div class="container">
         <h1>🎉 С Днём Рождения! 🎂</h1>
@@ -64,7 +71,14 @@
         <p>Желаю тебе океан радости, горы счастья и бескрайнее небо вдохновения!<br>Пусть сбудется всё, что задумано, и каждый новый день будет наполнен светом и теплом! 💫</p>
         <p>Ты невероятный человек, и этот мир становится ярче благодаря тебе. Спасибо, что ты есть! 💖</p>
         <img src="birthday-cake.jpg" alt="Торт ко дню рождения">
+        <br>
+        <button class="play-button" onclick="document.getElementById('song').play()">▶ Воспроизвести песню</button>
     </div>
+
+    <audio id="song">
+        <source src="Record (online-voice-recorder.com) (2).mp3" type="audio/mpeg">
+        Ваш браузер не поддерживает воспроизведение аудио.
+    </audio>
 
     <footer>
         С любовью и улыбкой — поздравляю тебя! 🥳
