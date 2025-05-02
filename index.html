@@ -32,7 +32,7 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
-            background-color: rgba(255, 255, 255, 0.6); /* Прозрачность увеличена */
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
         }
 
@@ -62,7 +62,7 @@
         }
 
         .wheel-container {
-            margin-top: 100px;
+            margin-top: 40px;
             position: relative;
             width: 300px;
             height: 300px;
@@ -113,6 +113,22 @@
             color: #ec407a;
         }
 
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f06292;
+            top: -10px;
+            animation: fall 5s infinite linear;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
         iframe {
             margin-top: 40px;
             width: 100%;
@@ -137,13 +153,51 @@
             background: linear-gradient(135deg, #ec407a, #d81b60);
         }
 
-        /* Сердечки */
-        .heart {
+        /* Слайдер */
+        .slider {
+            position: relative;
+            max-width: 600px;
+            margin: auto;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .slide {
+            width: 100%;
+            display: none;
+            border-radius: 15px;
+        }
+
+        .prev, .next {
             position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 64, 129, 0.8);
+            color: white;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 50%;
             font-size: 24px;
-            pointer-events: none;
-            opacity: 1;
-            transition: transform 1s ease-out, opacity 1s ease-out;
+            z-index: 1;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(216, 27, 96, 0.9);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
+        .next {
+            right: 10px;
         }
     </style>
 </head>
@@ -156,47 +210,51 @@
             confetti.style.left = Math.random() * 100 + 'vw';
             confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
             confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            confetti.style.position = 'fixed';
-            confetti.style.width = '10px';
-            confetti.style.height = '10px';
-            confetti.style.top = '-10px';
-            confetti.style.animation = 'fall 5s infinite linear';
-            confetti.style.opacity = 0.8;
-            confetti.style.zIndex = '0';
             document.body.appendChild(confetti);
         }
-
-        const style = document.createElement('style');
-        style.innerHTML = `
-            @keyframes fall {
-                0% { transform: translateY(-10px) rotate(0); }
-                100% { transform: translateY(100vh) rotate(360deg); }
-            }
-        `;
-        document.head.appendChild(style);
     </script>
 
     <div class="container">
-        <button class="play-button" onclick="toggleSong()">❚❚ Начать поздравление</button>
+        <button class="play-button" onclick="toggleSong()">❚❚ Остановить песню</button>
+
         <div class="emoji">🎉🎂🎈</div>
         <h1>С Днём Рождения, Принцесса!</h1>
         <p>Дорогая Алина!</p>
         <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
         ТЫ одна такая на этот мир, сияй ✨</p>
         <p>ТЫ самая-самая во всех смыслах 🌟</p>
-        <p>Сэни сэвийорум 💫</p>
-        <p>Всё у тебя будет, и я буду рядом ❤️</p>
 
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
-            <button class="wheel-btn" onclick="spinWheel()">🎉 Крути колесо желаний</button>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
         </div>
 
         <div class="message" id="message"></div>
 
         <div style="margin-top: 40px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=0&mute=1"
-                title="YouTube video player" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        </div>
+
+        <!-- Кнопка для открытия альбома -->
+        <div style="margin-top: 40px;">
+            <button class="play-button" onclick="checkPassword()">📷 Открыть альбом</button>
+        </div>
+
+        <!-- Фотоальбом -->
+        <div id="album" style="display: none; margin-top: 40px;">
+            <h2>Фотоальбом 📸</h2>
+            <div class="slider">
+                <button class="prev" onclick="changeSlide(-1)">❮</button>
+                <div class="slides">
+                    <img src="album1.jpg" class="slide" style="display: block;">
+                    <img src="album2.jpg" class="slide">
+                    <img src="album3.jpg" class="slide">
+                </div>
+                <button class="next" onclick="changeSlide(1)">❯</button>
+            </div>
         </div>
     </div>
 
@@ -209,7 +267,6 @@
         С любовью твое чудовище 💖
     </footer>
 
-    <!-- Fireworks -->
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
     <script>
         const container = document.body;
@@ -228,13 +285,12 @@
         fireworks.start();
     </script>
 
-    <!-- Музыка -->
     <script>
         function toggleSong() {
             var song = document.getElementById('song');
             if (song.paused) {
                 song.play();
-                document.querySelector('.play-button').innerHTML = "❚❚ Пауза";
+                document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
             } else {
                 song.pause();
                 document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
@@ -242,9 +298,9 @@
         }
 
         const wishes = [
-            "Ты достойна счастья всего мира!",
+            "Счастья и удачи во всем!",
             "Пусть каждый день будет ярким и незабываемым!",
-            "Смейся чаще, ведь тебе это так чертовски идет!",
+            "Смейся чаще, люби искренне и живи с удовольствием!",
             "Здоровья тебе и твоим близким!",
             "Ты заслуживаешь только лучшего, пусть так и будет!",
             "Пусть твоя жизнь будет как сказка!"
@@ -260,28 +316,35 @@
                 message.innerText = wishes[randomIndex];
             }, 4000);
         }
+
+        function checkPassword() {
+            const password = prompt("Введите секретное слово для доступа к альбому:");
+            if (password && password.toLowerCase() === "принцесса") {
+                document.getElementById("album").style.display = "block";
+                showSlide(currentSlide);
+            } else {
+                alert("Неверное слово. Попробуй ещё раз!");
+            }
+        }
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.getElementsByClassName("slide");
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[currentSlide].style.display = "block";
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
     </script>
-
-    <!-- Сердечки при клике -->
-    <script>
-        document.addEventListener('click', function(e) {
-            const heart = document.createElement('div');
-            heart.textContent = '💗';
-            heart.className = 'heart';
-            heart.style.left = (e.pageX - 10) + 'px';
-            heart.style.top = (e.pageY - 20) + 'px';
-            document.body.appendChild(heart);
-
-            setTimeout(() => {
-                heart.style.transform = 'translateY(-100px) scale(1.5)';
-                heart.style.opacity = '0';
-            }, 10);
-
-            setTimeout(() => {
-                heart.remove();
-            }, 1100);
-        });
-    </script>
-
 </body>
 </html>
