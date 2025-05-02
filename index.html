@@ -316,16 +316,27 @@
                 message.innerText = wishes[randomIndex];
             }, 4000);
         }
-
-        function checkPassword() {
-            const password = prompt("Введите секретное слово для доступа к альбому:");
-            if (password && password.toLowerCase() === "принцесса") {
-                document.getElementById("album").style.display = "block";
-                showSlide(currentSlide);
-            } else {
-                alert("Неверное слово. Попробуй ещё раз!");
-            }
+<script>
+    function decode(str) {
+        try {
+            return decodeURIComponent(escape(atob(str)));
+        } catch {
+            return "";
         }
+    }
+
+    function checkPassword() {
+        const input = prompt("Введите секретное слово:");
+        const cleaned = input ? input.trim() : "";
+        const secret = "0L/RgNC40LLQtdGA0YHQsA==";
+        if (decode(secret) === cleaned) {
+            document.getElementById("album").style.display = "block";
+            showSlide(currentSlide);
+        } else {
+            alert("Неверное слово. Попробуй ещё раз!");
+        }
+    }
+</script>
 
         let currentSlide = 0;
 
