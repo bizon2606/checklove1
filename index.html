@@ -7,79 +7,53 @@
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
         body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
+            font-family: 'Pacifico', cursive;
             background: #fff0f5;
+            text-align: center;
             overflow-x: hidden;
         }
         .container {
-            padding: 40px 20px;
-            text-align: center;
+            padding: 20px;
         }
-        h1 {
-            font-family: 'Pacifico', cursive;
-            font-size: 3em;
-            color: #d63384;
-        }
-        p {
-            font-size: 1.2em;
-            color: #444;
+        .play-button, .wheel-btn {
+            background-color: #f06292;
+            border: none;
+            padding: 10px 20px;
+            color: white;
+            font-size: 18px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 10px;
         }
         .emoji {
             font-size: 3em;
+            margin: 10px;
         }
         .wheel-container {
-            margin-top: 40px;
+            margin-top: 30px;
         }
         .wheel {
-            width: 200px;
-            height: 200px;
-            margin: auto;
-            border: 10px solid #d63384;
+            width: 150px;
+            height: 150px;
+            border: 10px solid #ba68c8;
             border-radius: 50%;
-            background: conic-gradient(#f06292 0% 16.6%, #ba68c8 16.6% 33.3%, #ffd54f 33.3% 50%, #81d4fa 50% 66.6%, #aed581 66.6% 83.3%, #ff8a65 83.3% 100%);
-            transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-        }
-        .wheel-btn {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
+            margin: auto;
+            transition: transform 4s ease-out;
         }
         .message {
             margin-top: 20px;
-            font-size: 1.3em;
-            color: #e91e63;
-        }
-        .play-button {
-            background-color: #ff69b4;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1.2em;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-        iframe {
-            width: 100%;
-            max-width: 560px;
-            height: 315px;
-            border: none;
+            font-size: 20px;
+            color: #7b1fa2;
         }
         .slider {
             position: relative;
-            max-width: 500px;
+            max-width: 600px;
             margin: auto;
         }
         .slide {
-            width: 100%;
             display: none;
-            border-radius: 10px;
+            width: 100%;
+            border-radius: 20px;
         }
         .prev, .next {
             cursor: pointer;
@@ -87,38 +61,34 @@
             top: 50%;
             width: auto;
             margin-top: -22px;
-            color: #fff;
+            padding: 16px;
+            color: white;
             font-weight: bold;
-            font-size: 30px;
+            font-size: 24px;
+            border-radius: 0 3px 3px 0;
             user-select: none;
-            background: rgba(0,0,0,0.3);
-            padding: 10px;
-            border-radius: 50%;
-        }
-        .prev {
-            left: 0;
+            background-color: rgba(0,0,0,0.4);
         }
         .next {
             right: 0;
+            border-radius: 3px 0 0 3px;
         }
         footer {
             margin-top: 40px;
-            padding: 20px;
-            text-align: center;
-            color: #888;
+            font-size: 18px;
+            color: #d81b60;
         }
         .confetti {
             position: fixed;
+            top: -10px;
             width: 10px;
             height: 10px;
-            background-color: red;
-            z-index: 9999;
-            top: -10px;
-            animation: fall linear infinite;
+            background-color: pink;
+            animation: fall 5s linear infinite;
         }
         @keyframes fall {
             to {
-                transform: translateY(100vh) rotateZ(360deg);
+                transform: translateY(100vh) rotate(360deg);
             }
         }
     </style>
@@ -184,7 +154,7 @@
     </audio>
 
     <footer>
-        С любовью, твоё чудовище 💖
+        С любовью твое чудовище 💖
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
@@ -237,19 +207,20 @@
             }, 4000);
         }
 
-        async function checkPassword() {
-            const input = prompt("Введиавте секретное слово:");
-            if (!input) return;
-
+        async function hashPassword(input) {
             const encoder = new TextEncoder();
             const data = encoder.encode(input.trim().toLowerCase());
             const hashBuffer = await crypto.subtle.digest('SHA-256', data);
             const hashArray = Array.from(new Uint8Array(hashBuffer));
-            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
 
-            const correctHash = 'bb54b5b3f209b9e04fbe5bafc872881cb50f3ec4006ecfa214985647fd33d8e1';
+        async function checkPassword() {
+            const password = prompt("Введите секретное слово для доступа к альбому:");
+            const userHash = await hashPassword(password || '');
+            const correctHash = "bb54b5b3f209b9e04fbe5bafc872881cb50f3ec4006ecfa214985647fd33d8e1"; // хеш от "принцесса"
 
-            if (hashHex === correctHash) {
+            if (userHash === correctHash) {
                 document.getElementById("album").style.display = "block";
                 showSlide(currentSlide);
             } else {
