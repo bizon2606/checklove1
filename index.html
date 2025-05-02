@@ -6,198 +6,141 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             font-family: 'Pacifico', cursive;
-            background: url('foto.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #6a1b9a;
-            text-align: center;
+            background-color: #fff0f5;
             margin: 0;
-            padding: 0;
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
         }
 
         .container {
-            margin-top: 60px;
-            padding: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 1;
-            position: relative;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 56px;
-            color: #ec407a;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 26px;
-            margin: 20px 0;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 25px;
-            background-color: #ec407a;
-            color: white;
-            font-size: 20px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+            text-align: center;
+            padding: 20px;
         }
 
         .emoji {
-            font-size: 36px;
+            font-size: 50px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            color: #d81b60;
+        }
+
+        p {
+            font-size: 24px;
+            color: #333;
+        }
+
+        .play-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #ba68c8;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .play-button:hover {
+            background-color: #ab47bc;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+            }
         }
 
         .wheel-container {
             margin-top: 40px;
-            position: relative;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 10px solid #ec407a;
-            overflow: hidden;
-            background: radial-gradient(circle, #ff4081, #f06292);
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .wheel {
-            width: 100%;
-            height: 100%;
+            width: 150px;
+            height: 150px;
+            border: 10px solid #d81b60;
             border-radius: 50%;
-            background: url('wheel.png') no-repeat center center;
-            background-size: cover;
-            position: absolute;
+            margin: 0 auto 20px;
             transition: transform 4s ease-out;
+            background: repeating-conic-gradient(
+                #ffd54f 0deg 60deg,
+                #ba68c8 60deg 120deg,
+                #81d4fa 120deg 180deg,
+                #ffd54f 180deg 240deg,
+                #ba68c8 240deg 300deg,
+                #81d4fa 300deg 360deg
+            );
         }
 
         .wheel-btn {
-            font-size: 24px;
-            background-color: #ff4081;
-            color: white;
-            padding: 15px 30px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #81d4fa;
+            color: #000;
             border: none;
-            border-radius: 50%;
+            border-radius: 10px;
             cursor: pointer;
-            z-index: 10;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .wheel-btn:hover {
-            background-color: #d81b60;
         }
 
         .message {
-            font-size: 24px;
-            margin-top: 30px;
-            font-weight: bold;
-            color: #ec407a;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f06292;
-            top: -10px;
-            animation: fall 5s infinite linear;
-            opacity: 0.8;
-            z-index: 0;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0); }
-            100% { transform: translateY(100vh) rotate(360deg); }
+            margin-top: 20px;
+            font-size: 20px;
+            color: #4a148c;
         }
 
         iframe {
-            margin-top: 40px;
             width: 100%;
+            max-width: 560px;
             height: 315px;
             border: none;
         }
 
-        .play-button {
-            background: linear-gradient(135deg, #ff4081, #f06292);
-            color: white;
-            font-size: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ec407a, #d81b60);
-        }
-
-        /* Слайдер */
         .slider {
             position: relative;
             max-width: 600px;
             margin: auto;
-            border-radius: 15px;
-            overflow: hidden;
         }
 
-        .slides {
-            position: relative;
+        .slides img {
             width: 100%;
-            height: auto;
-        }
-
-        .slide {
-            width: 100%;
-            display: none;
-            border-radius: 15px;
+            border-radius: 10px;
         }
 
         .prev, .next {
+            cursor: pointer;
             position: absolute;
             top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 64, 129, 0.8);
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            border-radius: 50%;
+            width: auto;
+            padding: 16px;
+            color: #d81b60;
+            font-weight: bold;
             font-size: 24px;
-            z-index: 1;
-        }
-
-        .prev:hover, .next:hover {
-            background-color: rgba(216, 27, 96, 0.9);
-        }
-
-        .prev {
-            left: 10px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(255, 255, 255, 0.7);
         }
 
         .next {
-            right: 10px;
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        footer {
+            margin-top: 50px;
+            font-size: 18px;
+            color: #999;
         }
     </style>
 </head>
@@ -238,12 +181,10 @@
                 allowfullscreen></iframe>
         </div>
 
-        <!-- Кнопка для открытия альбома -->
         <div style="margin-top: 40px;">
             <button class="play-button" onclick="checkPassword()">📷 Открыть альбом</button>
         </div>
 
-        <!-- Фотоальбом -->
         <div id="album" style="display: none; margin-top: 40px;">
             <h2>Фотоальбом 📸</h2>
             <div class="slider">
@@ -316,27 +257,6 @@
                 message.innerText = wishes[randomIndex];
             }, 4000);
         }
-<script>
-    function decode(str) {
-        try {
-            return decodeURIComponent(escape(atob(str)));
-        } catch {
-            return "";
-        }
-    }
-
-    function checkPassword() {
-        const input = prompt("Введите секретное слово:");
-        const cleaned = input ? input.trim() : "";
-        const secret = "0L/RgNC40LLQtdGA0YHQsA==";
-        if (decode(secret) === cleaned) {
-            document.getElementById("album").style.display = "block";
-            showSlide(currentSlide);
-        } else {
-            alert("Неверное слово. Попробуй ещё раз!");
-        }
-    }
-</script>
 
         let currentSlide = 0;
 
@@ -355,6 +275,27 @@
 
         function changeSlide(direction) {
             showSlide(currentSlide + direction);
+        }
+
+        function decode(str) {
+            try {
+                return decodeURIComponent(escape(window.atob(str)));
+            } catch (e) {
+                return "";
+            }
+        }
+
+        function checkPassword() {
+            const input = prompt("Введите квсекретное слово:");
+            const cleanedInput = (input || "").trim().toLowerCase();
+            const expected = decode("0L/RgNC40LLQtdGA0YHQsA=="); // "принцесса" в base64
+
+            if (cleanedInput === expected) {
+                document.getElementById("album").style.display = "block";
+                showSlide(currentSlide);
+            } else {
+                alert("Неверное слово. Попробуй ещё раз!");
+            }
         }
     </script>
 </body>
