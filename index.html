@@ -32,7 +32,7 @@
             margin-right: auto;
             z-index: 1;
             position: relative;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: rgba(255, 255, 255, 0.6); /* Прозрачность увеличена */
             border-radius: 10px;
         }
 
@@ -61,9 +61,8 @@
             font-size: 36px;
         }
 
-        /* Колесо желаний */
         .wheel-container {
-            margin-top: 40px;
+            margin-top: 100px;
             position: relative;
             width: 300px;
             height: 300px;
@@ -114,22 +113,6 @@
             color: #ec407a;
         }
 
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f06292;
-            top: -10px;
-            animation: fall 5s infinite linear;
-            opacity: 0.8;
-            z-index: 0;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
         iframe {
             margin-top: 40px;
             width: 100%;
@@ -153,6 +136,15 @@
         .play-button:hover {
             background: linear-gradient(135deg, #ec407a, #d81b60);
         }
+
+        /* Сердечки */
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            pointer-events: none;
+            opacity: 1;
+            transition: transform 1s ease-out, opacity 1s ease-out;
+        }
     </style>
 </head>
 <body>
@@ -164,39 +156,50 @@
             confetti.style.left = Math.random() * 100 + 'vw';
             confetti.style.backgroundColor = ['#f06292', '#ba68c8', '#ffd54f', '#81d4fa'][Math.floor(Math.random() * 4)];
             confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            confetti.style.position = 'fixed';
+            confetti.style.width = '10px';
+            confetti.style.height = '10px';
+            confetti.style.top = '-10px';
+            confetti.style.animation = 'fall 5s infinite linear';
+            confetti.style.opacity = 0.8;
+            confetti.style.zIndex = '0';
             document.body.appendChild(confetti);
         }
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fall {
+                0% { transform: translateY(-10px) rotate(0); }
+                100% { transform: translateY(100vh) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 
     <div class="container">
-        <!-- Кнопка управления песней -->
-        <button class="play-button" onclick="toggleSong()">❚❚ Остановить песню</button>
-
+        <button class="play-button" onclick="toggleSong()">❚❚ Начать поздравление</button>
         <div class="emoji">🎉🎂🎈</div>
         <h1>С Днём Рождения, Принцесса!</h1>
         <p>Дорогая Алина!</p>
         <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
         ТЫ одна такая на этот мир, сияй ✨</p>
         <p>ТЫ самая-самая во всех смыслах 🌟</p>
+        <p>Сэни сэвийорум 💫</p>
+        <p>Всё у тебя будет, и я буду рядом ❤️</p>
 
-        <!-- Колесо желаний -->
         <div class="wheel-container">
             <div class="wheel" id="wheel"></div>
-            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крути колесо желаний</button>
         </div>
 
         <div class="message" id="message"></div>
 
-        <!-- Видео -->
         <div style="margin-top: 40px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-                title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=0&mute=1"
+                title="YouTube video player" allowfullscreen></iframe>
         </div>
     </div>
 
-    <!-- Аудио -->
     <audio id="song" preload="auto" autoplay loop>
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
@@ -206,33 +209,7 @@
         С любовью твое чудовище 💖
     </footer>
 
-    <!-- Шарики -->
-    <script>
-        for (let i = 0; i < 20; i++) {
-            let balloon = document.createElement('div');
-            balloon.style.position = 'fixed';
-            balloon.style.left = Math.random() * 100 + 'vw';
-            balloon.style.bottom = '-100px';
-            balloon.style.width = '40px';
-            balloon.style.height = '50px';
-            balloon.style.backgroundColor = ['#f06292', '#ffd54f', '#81d4fa', '#a5d6a7'][Math.floor(Math.random() * 4)];
-            balloon.style.borderRadius = '50%';
-            balloon.style.zIndex = '0';
-            balloon.style.animation = 'rise ' + (Math.random() * 5 + 5) + 's ease-in infinite';
-            balloon.style.opacity = 0.8;
-            document.body.appendChild(balloon);
-        }
-
-        const style = document.createElement('style');
-        style.innerHTML =
-            `@keyframes rise {
-                0% { bottom: -100px; transform: translateX(0); }
-                100% { bottom: 100vh; transform: translateX(50px); }
-            }`;
-        document.head.appendChild(style);
-    </script>
-
-    <!-- Фейерверки -->
+    <!-- Fireworks -->
     <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
     <script>
         const container = document.body;
@@ -251,12 +228,13 @@
         fireworks.start();
     </script>
 
+    <!-- Музыка -->
     <script>
         function toggleSong() {
             var song = document.getElementById('song');
             if (song.paused) {
                 song.play();
-                document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
+                document.querySelector('.play-button').innerHTML = "❚❚ Пауза";
             } else {
                 song.pause();
                 document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
@@ -264,9 +242,9 @@
         }
 
         const wishes = [
-            "Счастья и удачи во всем!",
+            "Ты достойна счастья всего мира!",
             "Пусть каждый день будет ярким и незабываемым!",
-            "Смейся чаще, люби искренне и живи с удовольствием!",
+            "Смейся чаще, ведь тебе это так чертовски идет!",
             "Здоровья тебе и твоим близким!",
             "Ты заслуживаешь только лучшего, пусть так и будет!",
             "Пусть твоя жизнь будет как сказка!"
@@ -282,6 +260,27 @@
                 message.innerText = wishes[randomIndex];
             }, 4000);
         }
+    </script>
+
+    <!-- Сердечки при клике -->
+    <script>
+        document.addEventListener('click', function(e) {
+            const heart = document.createElement('div');
+            heart.textContent = '💗';
+            heart.className = 'heart';
+            heart.style.left = (e.pageX - 10) + 'px';
+            heart.style.top = (e.pageY - 20) + 'px';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.style.transform = 'translateY(-100px) scale(1.5)';
+                heart.style.opacity = '0';
+            }, 10);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 1100);
+        });
     </script>
 
 </body>
