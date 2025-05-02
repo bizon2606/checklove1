@@ -207,20 +207,9 @@
             }, 4000);
         }
 
-        async function hashPassword(input) {
-            const encoder = new TextEncoder();
-            const data = encoder.encode(input.trim().toLowerCase());
-            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-            const hashArray = Array.from(new Uint8Array(hashBuffer));
-            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-        }
-
         async function checkPassword() {
-            const password = prompt("Введите секретное слово для доступа к альбому:");
-            const userHash = await hashPassword(password || '');
-            const correctHash = "1c3e25b82eab0c6b7f6c29f0ea70d52de2abcfb0f8187170d61a234ffb1ac6d6"; // Хеш от "принцесса"
-
-            if (userHash === correctHash) {
+            const password = prompt("Ввеуцуццудите секретное слово для доступа к альбому:");
+            if (password === "принцесса") {
                 document.getElementById("album").style.display = "block";
                 showSlide(currentSlide);
             } else {
