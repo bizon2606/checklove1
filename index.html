@@ -61,58 +61,6 @@
             font-size: 36px;
         }
 
-        .wheel-container {
-            margin-top: 40px;
-            position: relative;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            border: 10px solid #ec407a;
-            overflow: hidden;
-            background: radial-gradient(circle, #ff4081, #f06292);
-            margin-left: auto;
-            margin-right: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .wheel {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: url('wheel.png') no-repeat center center;
-            background-size: cover;
-            position: absolute;
-            transition: transform 4s ease-out;
-        }
-
-        .wheel-btn {
-            font-size: 24px;
-            background-color: #ff4081;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 10;
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .wheel-btn:hover {
-            background-color: #d81b60;
-        }
-
-        .message {
-            font-size: 24px;
-            margin-top: 30px;
-            font-weight: bold;
-            color: #ec407a;
-        }
-
         .confetti {
             position: fixed;
             width: 10px;
@@ -153,51 +101,19 @@
             background: linear-gradient(135deg, #ec407a, #d81b60);
         }
 
-        /* Слайдер */
-        .slider {
-            position: relative;
-            max-width: 600px;
-            margin: auto;
-            border-radius: 15px;
-            overflow: hidden;
+        .hidden-album {
+            display: none;
+            margin-top: 40px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .slides {
-            position: relative;
+        .hidden-album img {
             width: 100%;
             height: auto;
-        }
-
-        .slide {
-            width: 100%;
-            display: none;
-            border-radius: 15px;
-        }
-
-        .prev, .next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 64, 129, 0.8);
-            color: white;
-            border: none;
-            padding: 12px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 24px;
-            z-index: 1;
-        }
-
-        .prev:hover, .next:hover {
-            background-color: rgba(216, 27, 96, 0.9);
-        }
-
-        .prev {
-            left: 10px;
-        }
-
-        .next {
-            right: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -212,52 +128,45 @@
             confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
             document.body.appendChild(confetti);
         }
+
+        // Функция для дешифровки Base64
+        function decodeBase64(encoded) {
+            return decodeURIComponent(escape(atob(encoded)));
+        }
+
+        const correctSecretWord = decodeBase64('0LjQu9GM0YjQuNC60LA='); // Зашифрованное слово "Одесская" в Base64
     </script>
 
     <div class="container">
-        <button class="play-button" onclick="toggleSong()">❚❚ Остановить песню</button>
-
         <div class="emoji">🎉🎂🎈</div>
         <h1>С Днём Рождения, Принцесса!</h1>
         <p>Дорогая Алина!</p>
-        <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
-        ТЫ одна такая на этот мир, сияй ✨</p>
-        <p>ТЫ самая-самая во всех смыслах 🌟</p>
+        <p>Желаю тебе море счастья, оставайся такой, какая ты есть!<br>
+        Ты одна такая на этот мир, сияй ✨</p>
+        <p>Ты самая-самая во всех смыслах 🌟</p>
 
-        <div class="wheel-container">
-            <div class="wheel" id="wheel"></div>
-            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
+        <!-- Форма для ввода секретного слова -->
+        <input type="text" id="secretWord" placeholder="куда мы пошли первый раз?" style="font-size: 20px; padding: 10px; margin-top: 20px;">
+        <button onclick="checkSecretWord()" class="play-button">Проверить секретное слово</button>
+
+        <!-- Скрытый фотоальбом -->
+        <div class="hidden-album" id="photoAlbum">
+            <h2>Фотоальбом</h2>
+            <img src="photo1.jpg" alt="Фото 1">
+            <img src="photo2.jpg" alt="Фото 2">
+            <img src="photo3.jpg" alt="Фото 3">
         </div>
 
-        <div class="message" id="message"></div>
-
+        <!-- Видео -->
         <div style="margin-top: 40px;">
-            <iframe src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-                title="YouTube video player"
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player" frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
         </div>
-
-        <!-- Кнопка для открытия альбома -->
-        <div style="margin-top: 40px;">
-            <button class="play-button" onclick="checkPassword()">📷 Открыть альбом</button>
-        </div>
-
-        <!-- Фотоальбом -->
-        <div id="album" style="display: none; margin-top: 40px;">
-            <h2>Фотоальбом 📸</h2>
-            <div class="slider">
-                <button class="prev" onclick="changeSlide(-1)">❮</button>
-                <div class="slides">
-                    <img src="album1.jpg" class="slide" style="display: block;">
-                    <img src="album2.jpg" class="slide">
-                    <img src="album3.jpg" class="slide">
-                </div>
-                <button class="next" onclick="changeSlide(1)">❯</button>
-            </div>
-        </div>
     </div>
 
+    <!-- Аудио -->
     <audio id="song" preload="auto" autoplay loop>
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
@@ -267,84 +176,17 @@
         С любовью твое чудовище 💖
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
     <script>
-        const container = document.body;
-        const fireworks = new Fireworks.default(container, {
-            rocketsPoint: { min: 0, max: 100 },
-            hue: { min: 0, max: 360 },
-            delay: { min: 15, max: 30 },
-            speed: 2,
-            acceleration: 1.05,
-            friction: 0.97,
-            gravity: 1.5,
-            particles: 80,
-            trace: 3,
-            explosion: 5
-        });
-        fireworks.start();
+        function checkSecretWord() {
+            var userInput = document.getElementById('secretWord').value;
+            if (userInput === decodeBase64('0J/Rg9Cw0YDQvtC90YvQ')) {  // Сравниваем с зашифрованным словом
+                document.getElementById('photoAlbum').style.display = 'block'; // Показываем фотоальбом
+                alert("Секретное слово правильное! Альбом открыт!");
+            } else {
+                alert("Неправильное секретное слово!");
+            }
+        }
     </script>
 
-    <script>
-        function toggleSong() {
-            var song = document.getElementById('song');
-            if (song.paused) {
-                song.play();
-                document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
-            } else {
-                song.pause();
-                document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
-            }
-        }
-
-        const wishes = [
-            "Счастья и удачи во всем!",
-            "Пусть каждый день будет ярким и незабываемым!",
-            "Смейся чаще, люби искренне и живи с удовольствием!",
-            "Здоровья тебе и твоим близким!",
-            "Ты заслуживаешь только лучшего, пусть так и будет!",
-            "Пусть твоя жизнь будет как сказка!"
-        ];
-
-        function spinWheel() {
-            const wheel = document.getElementById('wheel');
-            const message = document.getElementById('message');
-            const randomRotation = Math.floor(Math.random() * 360) + 720;
-            wheel.style.transform = `rotate(${randomRotation}deg)`;
-            setTimeout(() => {
-                const randomIndex = Math.floor(Math.random() * wishes.length);
-                message.innerText = wishes[randomIndex];
-            }, 4000);
-        }
-
-        function checkPassword() {
-            const password = prompt("Введите секретное слово для доступа к альбому:");
-            if (password && password.toLowerCase() === "принцесса") {
-                document.getElementById("album").style.display = "block";
-                showSlide(currentSlide);
-            } else {
-                alert("Неверное слово. Попробуй ещё раз!");
-            }
-        }
-
-        let currentSlide = 0;
-
-        function showSlide(index) {
-            const slides = document.getElementsByClassName("slide");
-            if (index >= slides.length) currentSlide = 0;
-            if (index < 0) currentSlide = slides.length - 1;
-            else currentSlide = index;
-
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
-
-            slides[currentSlide].style.display = "block";
-        }
-
-        function changeSlide(direction) {
-            showSlide(currentSlide + direction);
-        }
-    </script>
 </body>
 </html>
