@@ -218,7 +218,7 @@
         async function checkPassword() {
             const password = prompt("Введите секретное слово для доступа к альбому:");
             const userHash = await hashPassword(password || '');
-            const correctHash = "bb54b5b3f209b9e04fbe5bafc872881cb50f3ec4006ecfa214985647fd33d8e1"; // хеш от "принцесса"
+            const correctHash = "1c3e25b82eab0c6b7f6c29f0ea70d52de2abcfb0f8187170d61a234ffb1ac6d6"; // Хеш от "принцесса"
 
             if (userHash === correctHash) {
                 document.getElementById("album").style.display = "block";
