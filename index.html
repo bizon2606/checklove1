@@ -6,141 +6,98 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
+        /* Пример стилей, подставь свои при необходимости */
         body {
             font-family: 'Pacifico', cursive;
+            text-align: center;
             background-color: #fff0f5;
             margin: 0;
+            padding: 0;
             overflow-x: hidden;
         }
-
         .container {
-            text-align: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
-
         .emoji {
-            font-size: 50px;
-            margin-top: 20px;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
-
         h1 {
-            font-size: 48px;
-            color: #d81b60;
+            font-size: 3em;
+            color: #e91e63;
         }
-
-        p {
-            font-size: 24px;
-            color: #333;
-        }
-
         .play-button {
-            margin-top: 20px;
+            margin: 20px auto;
             padding: 10px 20px;
-            font-size: 18px;
-            background-color: #ba68c8;
-            color: white;
+            font-size: 1.2em;
             border: none;
+            background-color: #e91e63;
+            color: white;
             border-radius: 10px;
             cursor: pointer;
         }
-
-        .play-button:hover {
-            background-color: #ab47bc;
+        .wheel-container {
+            margin: 40px 0;
         }
+        .wheel {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            border-radius: 50%;
+            border: 10px solid #e91e63;
+            transition: transform 4s ease-out;
+        }
+        .message {
+            margin-top: 20px;
+            font-size: 1.4em;
+        }
+        iframe {
+            width: 90%;
+            height: 300px;
+            max-width: 560px;
+            border: none;
+            border-radius: 12px;
+        }
+        footer {
+            margin-top: 40px;
+            font-size: 1.2em;
+            color: #777;
+        }
+        .slider {
+            position: relative;
+            width: 300px;
+            margin: 0 auto;
+        }
+        .slide {
+            width: 100%;
+            display: none;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            font-size: 2em;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transform: translateY(-50%);
+        }
+        .prev { left: -40px; }
+        .next { right: -40px; }
 
         .confetti {
-            position: absolute;
+            position: fixed;
             width: 10px;
             height: 10px;
-            border-radius: 50%;
+            background-color: red;
+            top: 0;
+            z-index: 9999;
             animation: fall linear infinite;
         }
 
         @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        .wheel-container {
-            margin-top: 40px;
-        }
-
-        .wheel {
-            width: 150px;
-            height: 150px;
-            border: 10px solid #d81b60;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            transition: transform 4s ease-out;
-            background: repeating-conic-gradient(
-                #ffd54f 0deg 60deg,
-                #ba68c8 60deg 120deg,
-                #81d4fa 120deg 180deg,
-                #ffd54f 180deg 240deg,
-                #ba68c8 240deg 300deg,
-                #81d4fa 300deg 360deg
-            );
-        }
-
-        .wheel-btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            background-color: #81d4fa;
-            color: #000;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .message {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #4a148c;
-        }
-
-        iframe {
-            width: 100%;
-            max-width: 560px;
-            height: 315px;
-            border: none;
-        }
-
-        .slider {
-            position: relative;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .slides img {
-            width: 100%;
-            border-radius: 10px;
-        }
-
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            padding: 16px;
-            color: #d81b60;
-            font-weight: bold;
-            font-size: 24px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background-color: rgba(255, 255, 255, 0.7);
-        }
-
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-
-        footer {
-            margin-top: 50px;
-            font-size: 18px;
-            color: #999;
+            0% { transform: translateY(0); }
+            100% { transform: translateY(100vh); }
         }
     </style>
 </head>
@@ -258,6 +215,19 @@
             }, 4000);
         }
 
+        function checkPassword() {
+            const input = prompt("Введите секретное слово:");
+            const cleanedInput = (input || "").trim().toLowerCase();
+            const correctPassword = "принцесса";
+
+            if (cleanedInput === correctPassword) {
+                document.getElementById("album").style.display = "block";
+                showSlide(currentSlide);
+            } else {
+                alert("Неверное слово. Попробуй ещё раз!");
+            }
+        }
+
         let currentSlide = 0;
 
         function showSlide(index) {
@@ -275,27 +245,6 @@
 
         function changeSlide(direction) {
             showSlide(currentSlide + direction);
-        }
-
-        function decode(str) {
-            try {
-                return decodeURIComponent(escape(window.atob(str)));
-            } catch (e) {
-                return "";
-            }
-        }
-
-        function checkPassword() {
-            const input = prompt("Введите квсекретное слово:");
-            const cleanedInput = (input || "").trim().toLowerCase();
-            const expected = decode("0L/RgNC40LLQtdGA0YHQsA=="); // "принцесса" в base64
-
-            if (cleanedInput === expected) {
-                document.getElementById("album").style.display = "block";
-                showSlide(currentSlide);
-            } else {
-                alert("Неверное слово. Попробуй ещё раз!");
-            }
         }
     </script>
 </body>
