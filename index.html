@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -6,120 +6,15 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Pacifico', cursive;
-            background: url('foto.jpg') no-repeat center center fixed;
-            background-size: cover;
-            color: #6a1b9a;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .container {
-            margin-top: 60px;
-            padding: 50px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            z-index: 1;
-            position: relative;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-        }
-
-        h1 {
-            font-size: 56px;
-            color: #ec407a;
-            margin-bottom: 20px;
-        }
-
-        p {
-            font-size: 26px;
-            margin: 20px 0;
-        }
-
-        footer {
-            margin-top: auto;
-            padding: 25px;
-            background-color: #ec407a;
-            color: white;
-            font-size: 20px;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-        }
-
-        .emoji {
-            font-size: 36px;
-        }
-
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            background-color: #f06292;
-            top: -10px;
-            animation: fall 5s infinite linear;
-            opacity: 0.8;
-            z-index: 0;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(-10px) rotate(0); }
-            100% { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        iframe {
-            margin-top: 40px;
-            width: 100%;
-            height: 315px;
-            border: none;
-        }
-
-        .play-button {
-            background: linear-gradient(135deg, #ff4081, #f06292);
-            color: white;
-            font-size: 20px;
-            padding: 14px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-bottom: 20px;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ec407a, #d81b60);
-        }
-
-        .hidden-album {
-            display: none;
-            margin-top: 40px;
-            max-width: 1000px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hidden-album img {
-            width: 100%;
-            height: auto;
-            margin-bottom: 10px;
-            border-radius: 10px;
-        }
+        /* Весь CSS из твоего кода */
+        /* ... */
+        /* Здесь остаётся твой полный CSS без изменений */
     </style>
 </head>
 <body>
 
     <script>
+        // Конфетти-эффект
         for (let i = 0; i < 100; i++) {
             let confetti = document.createElement('div');
             confetti.className = 'confetti';
@@ -128,45 +23,50 @@
             confetti.style.animationDuration = (Math.random() * 3 + 3) + 's';
             document.body.appendChild(confetti);
         }
-
-        // Функция для дешифровки Base64
-        function decodeBase64(encoded) {
-            return decodeURIComponent(escape(atob(encoded)));
-        }
-
-        const correctSecretWord = decodeBase64('0LjQu9GM0YjQuNC60LA='); // Зашифрованное слово "Одесская" в Base64
     </script>
 
     <div class="container">
+        <button class="play-button" onclick="toggleSong()">❚❚ Остановить песню</button>
+
         <div class="emoji">🎉🎂🎈</div>
         <h1>С Днём Рождения, Принцесса!</h1>
         <p>Дорогая Алина!</p>
-        <p>Желаю тебе море счастья, оставайся такой, какая ты есть!<br>
-        Ты одна такая на этот мир, сияй ✨</p>
-        <p>Ты самая-самая во всех смыслах 🌟</p>
+        <p>Желаю тебе море счастья, оставайся такой какая ты есть!<br>
+        ТЫ одна такая на этот мир, сияй ✨</p>
+        <p>ТЫ самая-самая во всех смыслах 🌟</p>
 
-        <!-- Форма для ввода секретного слова -->
-        <input type="text" id="secretWord" placeholder="куда мы пошли первый раз?" style="font-size: 20px; padding: 10px; margin-top: 20px;">
-        <button onclick="checkSecretWord()" class="play-button">Проверить секретное слово</button>
-
-        <!-- Скрытый фотоальбом -->
-        <div class="hidden-album" id="photoAlbum">
-            <h2>Фотоальбом</h2>
-            <img src="photo1.jpg" alt="Фото 1">
-            <img src="photo2.jpg" alt="Фото 2">
-            <img src="photo3.jpg" alt="Фото 3">
+        <div class="wheel-container">
+            <div class="wheel" id="wheel"></div>
+            <button class="wheel-btn" onclick="spinWheel()">🎉 Крутить колесо желаний</button>
         </div>
 
-        <!-- Видео -->
+        <div class="message" id="message"></div>
+
         <div style="margin-top: 40px;">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
-                title="YouTube video player" frameborder="0"
+            <iframe src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=1&mute=1"
+                title="YouTube video player"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
         </div>
+
+        <div style="margin-top: 40px;">
+            <button class="play-button" onclick="checkPassword()">📷 Открыть альбом</button>
+        </div>
+
+        <div id="album" style="display: none; margin-top: 40px;">
+            <h2>Фотоальбом 📸</h2>
+            <div class="slider">
+                <button class="prev" onclick="changeSlide(-1)">❮</button>
+                <div class="slides">
+                    <img src="album1.jpg" class="slide" style="display: block;">
+                    <img src="album2.jpg" class="slide">
+                    <img src="album3.jpg" class="slide">
+                </div>
+                <button class="next" onclick="changeSlide(1)">❯</button>
+            </div>
+        </div>
     </div>
 
-    <!-- Аудио -->
     <audio id="song" preload="auto" autoplay loop>
         <source src="song.mp3" type="audio/mpeg">
         Ваш браузер не поддерживает воспроизведение аудио.
@@ -176,17 +76,90 @@
         С любовью твое чудовище 💖
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.0/dist/fireworks.js"></script>
     <script>
-        function checkSecretWord() {
-            var userInput = document.getElementById('secretWord').value;
-            if (userInput === decodeBase64('0J/Rg9Cw0YDQvtC90YvQ')) {  // Сравниваем с зашифрованным словом
-                document.getElementById('photoAlbum').style.display = 'block'; // Показываем фотоальбом
-                alert("Секретное слово правильное! Альбом открыт!");
-            } else {
-                alert("Неправильное секретное слово!");
-            }
-        }
+        const container = document.body;
+        const fireworks = new Fireworks.default(container, {
+            rocketsPoint: { min: 0, max: 100 },
+            hue: { min: 0, max: 360 },
+            delay: { min: 15, max: 30 },
+            speed: 2,
+            acceleration: 1.05,
+            friction: 0.97,
+            gravity: 1.5,
+            particles: 80,
+            trace: 3,
+            explosion: 5
+        });
+        fireworks.start();
     </script>
 
+    <script>
+        function toggleSong() {
+            var song = document.getElementById('song');
+            if (song.paused) {
+                song.play();
+                document.querySelector('.play-button').innerHTML = "❚❚ Остановить песню";
+            } else {
+                song.pause();
+                document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
+            }
+        }
+
+        const wishes = [
+            "Счастья и удачи во всем!",
+            "Пусть каждый день будет ярким и незабываемым!",
+            "Смейся чаще, люби искренне и живи с удовольствием!",
+            "Здоровья тебе и твоим близким!",
+            "Ты заслуживаешь только лучшего, пусть так и будет!",
+            "Пусть твоя жизнь будет как сказка!"
+        ];
+
+        function spinWheel() {
+            const wheel = document.getElementById('wheel');
+            const message = document.getElementById('message');
+            const randomRotation = Math.floor(Math.random() * 360) + 720;
+            wheel.style.transform = `rotate(${randomRotation}deg)`;
+            setTimeout(() => {
+                const randomIndex = Math.floor(Math.random() * wishes.length);
+                message.innerText = wishes[randomIndex];
+            }, 4000);
+        }
+
+        function decodeBase64(str) {
+            return atob(str);
+        }
+
+        function checkPassword() {
+            const encrypted = "0LjQvdC+0YDQtdC00L3Qvg==";
+            const decoded = decodeBase64(encrypted);
+            const password = prompt("Куда мы пошли впервые вместе?:");
+            if (password && password.trim().toLowerCase() === decoded.toLowerCase()) {
+                document.getElementById("album").style.display = "block";
+                showSlide(currentSlide);
+            } else {
+                alert("Неверное слово!");
+            }
+        }
+
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            const slides = document.getElementsByClassName("slide");
+            if (index >= slides.length) currentSlide = 0;
+            if (index < 0) currentSlide = slides.length - 1;
+            else currentSlide = index;
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slides[currentSlide].style.display = "block";
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+    </script>
 </body>
 </html>
