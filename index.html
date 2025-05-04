@@ -185,7 +185,26 @@
         </div>
 
         <div class="message" id="message"></div>
+<!-- СЮРПРИЗ: Боулинг -->
+<div style="margin: 40px 0;">
+    <button class="play-button" onclick="checkSecret()">Открой воспоминания 🎁</button>
+    <div id="secretPhoto" style="display:none; margin-top: 20px;">
+        <img src="bowling.jpg" alt="Сюрприз" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
+    </div>
+</div>
 
+<script>
+    function checkSecret() {
+        const input = prompt("Куда мы первый раз пошли вместе:");
+        const secret = "Боулинг";
+        if (input && input.trim().toLowerCase() === secret.toLowerCase()) {
+            document.getElementById("secretPhoto").style.display = "block";
+            alert("Умница моя");
+        } else {
+            alert("Неверное слово, Попробуй ещё!");
+        }
+    }
+</script>
         <!-- Видео -->
         <div style="margin-top: 40px;">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=0&mute=1"
@@ -284,26 +303,6 @@
             }, 4000);
         }
     </script>
-<!-- СЮРПРИЗ: Боулинг -->
-<div style="margin: 40px 0;">
-    <button class="play-button" onclick="checkSecret()">Узнать сюрприз 🎁</button>
-    <div id="secretPhoto" style="display:none; margin-top: 20px;">
-        <img src="bowling.jpg" alt="Сюрприз" style="max-width: 100%; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-    </div>
-</div>
-
-<script>
-    function checkSecret() {
-        const input = prompt("Введи ключевое слово:");
-        const secret = atob("0JHQvtC+0L3QuNGP"); // "Боулинг" в base64
-        if (input && input.trim().toLowerCase() === secret.toLowerCase()) {
-            document.getElementById("secretPhoto").style.display = "block";
-            alert("Правильно! Вот твой сюрприз 🎉");
-        } else {
-            alert("Неверное слово 😢 Попробуй ещё!");
-        }
-    }
-</script>
 
 </body>
 </html>
