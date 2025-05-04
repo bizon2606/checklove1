@@ -6,90 +6,198 @@
     <title>С Днём Рождения!</title>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Pacifico', cursive;
-            background: #fff0f5;
+            background: url('foto.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #6a1b9a;
             text-align: center;
+            margin: 0;
+            padding: 0;
             overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
+
         .container {
-            padding: 20px;
-        }
-        .play-button, .wheel-btn {
-            background-color: #f06292;
-            border: none;
-            padding: 10px 20px;
-            color: white;
-            font-size: 18px;
-            margin: 10px;
-            cursor: pointer;
+            margin-top: 60px;
+            padding: 50px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            z-index: 1;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.8);
             border-radius: 10px;
         }
+
+        h1 {
+            font-size: 56px;
+            color: #ec407a;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 26px;
+            margin: 20px 0;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 25px;
+            background-color: #ec407a;
+            color: white;
+            font-size: 20px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
         .emoji {
-            font-size: 3em;
-            margin: 10px;
+            font-size: 36px;
         }
+
         .wheel-container {
-            margin-top: 30px;
-        }
-        .wheel {
-            width: 150px;
-            height: 150px;
-            border: 10px solid #ba68c8;
+            margin-top: 40px;
+            position: relative;
+            width: 300px;
+            height: 300px;
             border-radius: 50%;
-            margin: auto;
+            border: 10px solid #ec407a;
+            overflow: hidden;
+            background: radial-gradient(circle, #ff4081, #f06292);
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: url('wheel.png') no-repeat center center;
+            background-size: cover;
+            position: absolute;
             transition: transform 4s ease-out;
         }
-        .message {
-            margin-top: 20px;
-            font-size: 20px;
-            color: #7b1fa2;
+
+        .wheel-btn {
+            font-size: 24px;
+            background-color: #ff4081;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
         }
+
+        .wheel-btn:hover {
+            background-color: #d81b60;
+        }
+
+        .message {
+            font-size: 24px;
+            margin-top: 30px;
+            font-weight: bold;
+            color: #ec407a;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f06292;
+            top: -10px;
+            animation: fall 5s infinite linear;
+            opacity: 0.8;
+            z-index: 0;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10px) rotate(0); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        iframe {
+            margin-top: 40px;
+            width: 100%;
+            height: 315px;
+            border: none;
+        }
+
+        .play-button {
+            background: linear-gradient(135deg, #ff4081, #f06292);
+            color: white;
+            font-size: 20px;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(135deg, #ec407a, #d81b60);
+        }
+
+        /* Слайдер */
         .slider {
             position: relative;
             max-width: 600px;
             margin: auto;
+            border-radius: 15px;
+            overflow: hidden;
         }
-        .slide {
-            display: none;
+
+        .slides {
+            position: relative;
             width: 100%;
-            border-radius: 20px;
+            height: auto;
         }
+
+        .slide {
+            width: 100%;
+            display: none;
+            border-radius: 15px;
+        }
+
         .prev, .next {
-            cursor: pointer;
             position: absolute;
             top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
+            transform: translateY(-50%);
+            background-color: rgba(255, 64, 129, 0.8);
             color: white;
-            font-weight: bold;
+            border: none;
+            padding: 12px;
+            cursor: pointer;
+            border-radius: 50%;
             font-size: 24px;
-            border-radius: 0 3px 3px 0;
-            user-select: none;
-            background-color: rgba(0,0,0,0.4);
+            z-index: 1;
         }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(216, 27, 96, 0.9);
+        }
+
+        .prev {
+            left: 10px;
+        }
+
         .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        footer {
-            margin-top: 40px;
-            font-size: 18px;
-            color: #d81b60;
-        }
-        .confetti {
-            position: fixed;
-            top: -10px;
-            width: 10px;
-            height: 10px;
-            background-color: pink;
-            animation: fall 5s linear infinite;
-        }
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
+            right: 10px;
         }
     </style>
 </head>
@@ -130,10 +238,12 @@
                 allowfullscreen></iframe>
         </div>
 
+        <!-- Кнопка для открытия альбома -->
         <div style="margin-top: 40px;">
             <button class="play-button" onclick="checkPassword()">📷 Открыть альбом</button>
         </div>
 
+        <!-- Фотоальбом -->
         <div id="album" style="display: none; margin-top: 40px;">
             <h2>Фотоальбом 📸</h2>
             <div class="slider">
@@ -207,9 +317,9 @@
             }, 4000);
         }
 
-        async function checkPassword() {
-            const password = prompt("Ввеуцуццудите секретное слово для доступа к альбому:");
-            if (password === "принцесса") {
+        function checkPassword() {
+            const password = prompt("Введите секретное слово для доступа к альбому:");
+            if (password && password.toLowerCase() === "принцесса") {
                 document.getElementById("album").style.display = "block";
                 showSlide(currentSlide);
             } else {
