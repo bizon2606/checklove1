@@ -303,29 +303,44 @@
             }, 4000);
         }
     </script>
- <script>
-    // Сразу после загрузки страницы
-    window.addEventListener('DOMContentLoaded', () => {
-      fetch('https://ipinfo.io/json?token=63f201a3cd08f0') // Заменить YOUR_TOKEN на свой токен
-        .then(response => response.json())
-        .then(data => {
-          const ip = data.ip;
-          console.log("IP:", ip);
+<script>
+  // Функция для определения типа устройства
+  function getDeviceType() {
+    const ua = navigator.userAgent;
 
-          fetch('https://script.google.com/macros/s/AKfycbybUrqc7j0bxyNFcKkr4bB-rTw48FW3o8AJUwrA4hl5fy3EaAYr1YutvlTSB3FGKHs/exec', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `ip=${encodeURIComponent(ip)}`
-          })
-          .then(response => response.text())
-          .then(data => console.log('Ответ от скрипта:', data))
-          .catch(error => console.error('Ошибка при отправке:', error));
+    if (/android/i.test(ua)) return "Android";
+    if (/iPad|iPhone|iPod/.test(ua)) return "iOS";
+    if (/Windows NT/i.test(ua)) return "Windows";
+    if (/Macintosh/i.test(ua)) return "macOS";
+    if (/Linux/i.test(ua)) return "Linux";
+    return "Unknown";
+  }
+
+  // Сразу после загрузки страницы
+  window.addEventListener('DOMContentLoaded', () => {
+    const device = getDeviceType();
+
+    fetch('https://ipinfo.io/json?token=63f201a3cd08f0')
+      .then(response => response.json())
+      .then(data => {
+        const ip = data.ip;
+        console.log("IP:", ip);
+        console.log("Устройство:", device);
+
+        fetch('https://script.google.com/macros/s/AKfycbybUrqc7j0bxyNFcKkr4bB-rTw48FW3o8AJUwrA4hl5fy3EaAYr1YutvlTSB3FGKHs/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `ip=${encodeURIComponent(ip)}&device=${encodeURIComponent(device)}`
         })
-        .catch(error => {
-          console.error('Ошибка при получении IP:', error);
-        });
-    });
-  </script>
+        .then(response => response.text())
+        .then(data => console.log('Ответ от скрипта:', data))
+        .catch(error => console.error('Ошибка при отправке:', error));
+      })
+      .catch(error => {
+        console.error('Ошибка при получении IP:', error);
+      });
+  });
+</script>
 
 </body>
 </html>
