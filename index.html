@@ -3,17 +3,23 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>серденько моє !</title>
+    <title>Серденько моє !</title>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQGDB2LFH2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
+      function gtag() {
+        dataLayer.push(arguments);
+      }
       gtag('js', new Date());
+
       gtag('config', 'G-BQGDB2LFH2');
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <style>
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         font-family: 'Pacifico', cursive;
         background: url('foto.jpg') no-repeat center center fixed;
@@ -27,6 +33,7 @@
         display: flex;
         flex-direction: column;
       }
+
       .container {
         margin-top: 60px;
         padding: 50px;
@@ -38,8 +45,18 @@
         background-color: rgba(255, 255, 255, 0.6);
         border-radius: 10px;
       }
-      h1 { font-size: 56px; color: #ec407a; margin-bottom: 20px; }
-      p { font-size: 26px; margin: 20px 0; }
+
+      h1 {
+        font-size: 56px;
+        color: #ec407a;
+        margin-bottom: 20px;
+      }
+
+      p {
+        font-size: 26px;
+        margin: 20px 0;
+      }
+
       footer {
         margin-top: auto;
         padding: 25px;
@@ -49,136 +66,83 @@
         border-top-left-radius: 20px;
         border-top-right-radius: 20px;
       }
-      .emoji { font-size: 36px; }
 
-      /* Колесо желаний */
-      .wheel-container {
-        margin-top: 120px;
-        position: relative;
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        border: 10px solid #ec407a;
-        overflow: hidden;
-        background: radial-gradient(circle, #ff4081, #f06292);
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .emoji {
+        font-size: 36px;
       }
-      .wheel {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background: url('wheel.png') no-repeat center center;
-        background-size: cover;
-        position: absolute;
-        transition: transform 4s ease-out;
-      }
-      .wheel-btn {
-        font-size: 24px;
-        background-color: #ff4081;
-        color: white;
-        padding: 15px 30px;
-        border: none;
-        border-radius: 50%;
-        cursor: pointer;
-        z-index: 10;
-        position: absolute;
-        bottom: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-      }
-      .wheel-btn:hover { background-color: #d81b60; }
-      .message { font-size: 24px; margin-top: 30px; font-weight: bold; color: #ec407a; }
-      .confetti {
+
+      /* Модальное окно для ввода пароля */
+      #password-form {
         position: fixed;
-        width: 10px;
-        height: 10px;
-        background-color: #f06292;
-        top: -10px;
-        animation: fall 5s infinite linear;
-        opacity: 0.8;
-        z-index: 0;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        display: none;
+        width: 400px;
       }
-      @keyframes fall { 0% { transform: translateY(-10px) rotate(0); } 100% { transform: translateY(100vh) rotate(360deg); } }
-      iframe {
-        margin-top: 40px;
-        width: 100%;
-        height: 315px;
-        border: none;
-      }
-      .play-button {
-        background: linear-gradient(135deg, #ff4081, #f06292);
-        color: white;
+
+      #password-form label {
         font-size: 20px;
-        padding: 14px 28px;
-        border: none;
-        border-radius: 50px;
-        cursor: pointer;
-        margin-bottom: 20px;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-        transition: background 0.3s;
+        margin-bottom: 10px;
       }
-      .play-button:hover { background: linear-gradient(135deg, #ec407a, #d81b60); }
+
+      #password-form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        font-size: 18px;
+        border: 2px solid #ec407a;
+        border-radius: 8px;
+      }
+
+      #password-form button {
+        padding: 10px 20px;
+        background-color: #ec407a;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
+      #password-form button:hover {
+        background-color: #d81b60;
+      }
+
+      #error-message {
+        color: red;
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      #site-content {
+        display: none;
+      }
+
     </style>
   </head>
   <body>
-    <!-- Секретный доступ -->
+
+    <!-- Секретный доступ (Модальное окно) -->
     <div id="password-form">
       <label for="secret-word">Введите секретное слово:</label>
-      <input type="text" id="secret-word">
+      <input type="text" id="secret-word" placeholder="Секретное слово">
       <button onclick="checkPassword()">Войти</button>
       <p id="error-message"></p>
     </div>
-    <div id="site-content" style="display: none;">
+
+    <!-- Основной контент вашего сайта -->
+    <div id="site-content">
       <div class="container">
-        <button class="play-button" onclick="toggleSong()">❚❚ Начать поздраждание</button>
         <h1>С Днём Рождения, Принцесса❤️‍🩹</h1>
-        <p>серденько,все негативные вещи что случаются в жизни, они временны и решаемы. ты знаешь, как для тебя я сбособен на многое. мне только скажи и я все решу. Главное не проебать нам друг друга. Ты очень дорога для меня и я хочу проявлять заботу к тебе каждый час, каждый день, всегда!</p>
-        <p>я знаю что настанет еще наше время, и пусть оно начнется с поездки в Париж!</p>
-        
-        <div style="margin: 40px 0;">
-          <button class="play-button" onclick="checkSecret()">Новые воспоминания🎁</button>
-          <div id="photoAlbum" style="display:none; margin-top: 20px;">
-            <h2>Как то таке</h2>
-            <div class="slider" style="position: relative; max-width: 100%; margin: auto;">
-              <button onclick="changeSlide(-1)" style="position: absolute; top: 50%; left: 0; transform: translateY(-50%); font-size: 32px; background: none; border: none; cursor: pointer;">❮</button>
-              <img class="album-slide" src="bowling1.jpg" style="width: 100%; max-height: 500px; border-radius: 12px; display: block;">
-              <img class="album-slide" src="bowling2.jpg" style="width: 100%; max-height: 500px; border-radius: 12px; display: none;">
-              <img class="album-slide" src="bowling4.jpg" style="width: 100%; max-height: 500px; border-radius: 12px; display: none;">
-              <img class="album-slide" src="bowling3.jpg" style="width: 100%; max-height: 500px; border-radius: 12px; display: none;">
-              <button id="nextPhotoBtn" onclick="changeSlide(1)" style="position: absolute; top: 50%; right: 0; transform: translateY(-50%); font-size: 32px; background: none; border: none; cursor: pointer;">❯</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Колесо желаний -->
-        <div class="wheel-container">
-          <div class="wheel" id="wheel"></div>
-          <button class="wheel-btn" onclick="spinWheel()">Крути колесо желаний</button>
-        </div>
-        <div class="message" id="message"></div>
-
-        <!-- Видео -->
-        <div style="margin-top: 40px;">
-          <iframe width="560" height="315" src="https://www.youtube.com/embed/rnjbemXGNmw?autoplay=0&mute=1"
-              title="YouTube video player" frameborder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowfullscreen></iframe>
-        </div>
+        <p>серденько, все негативные вещи, что случаются в жизни, они временны и решаемы...</p>
+        <!-- Ваш основной сайт здесь -->
       </div>
-
-      <!--  -->
-      <audio id="song" preload="auto" autoplay loop>
-          <source src="song2.mp3" type="audio/mpeg">
-          Ваш браузер не поддерживает воспроизведение аудио.
-      </audio>
-
-      <footer>
-          Люблю тебя и желаю каждый день быть вместе, твое чудовище 💖
-      </footer>
     </div>
 
     <script>
@@ -191,150 +155,18 @@
         const passwordForm = document.getElementById("password-form");
 
         if (inputPassword === secretWord) {
-            passwordForm.style.display = 'none';
-            siteContent.style.display = 'block';
+          passwordForm.style.display = 'none';
+          siteContent.style.display = 'block';
         } else {
-            errorMessage.textContent = "Неверное секретное слово. Попробуйте снова.";
+          errorMessage.textContent = "Неверное секретное слово. Попробуйте снова.";
         }
       }
 
-      let currentSlide = 0;
-
-      function showSlide(index) {
-          const slides = document.getElementsByClassName("album-slide");
-          if (index >= slides.length) currentSlide = 0;
-          else if (index < 0) currentSlide = slides.length - 1;
-          else currentSlide = index;
-
-          for (let i = 0; i < slides.length; i++) {
-              slides[i].style.display = "none";
-          }
-
-          slides[currentSlide].style.display = "block";
-      }
-
-      function changeSlide(direction) {
-          showSlide(currentSlide + direction);
-      }
-
-      function checkSecret() {
-          const input = prompt("Как мы хотели назвать Лали?:");
-          const secret = "Ами";
-          if (input && input.trim().toLowerCase() === secret.toLowerCase()) {
-              document.getElementById("photoAlbum").style.display = "block";
-              showSlide(currentSlide);
-              alert("Умница");
-          } else {
-              alert("Неверное слово. Попробуй ещё!");
-          }
-      }
-
-      function toggleSong() {
-          var song = document.getElementById('song');
-          if (song.paused) {
-              song.play();
-              document.querySelector('.play-button').innerHTML = "❚❚ Пауза";
-          } else {
-              song.pause();
-              document.querySelector('.play-button').innerHTML = "▶ Начать поздравление";
-          }
-      }
-
-      const wishes = [
-          "Ты достойна счастья всего мира!",
-          "Пусть каждый день будет ярким и незабываемым!",
-          "Улыбайся чаще, ведь тебе это так чертовски идет!",
-          "Здоровья тебе и твоим близким!",
-          "Ты заслуживаешь только лучшего, пусть так и будет!",
-          "Пусть твоя жизнь будет как сказка!",
-          "Сэни сэвийорум, Ашкым!", 
-          "Все у тебя будет, я буду рядом"
-      ];
-
-      function spinWheel() {
-          const wheel = document.getElementById('wheel');
-          const message = document.getElementById('message');
-          const randomRotation = Math.floor(Math.random() * 360) + 720;
-          wheel.style.transform = `rotate(${randomRotation}deg)`;
-          setTimeout(() => {
-              const randomIndex = Math.floor(Math.random() * wishes.length);
-              message.innerText = wishes[randomIndex];
-          }, 4000);
-      }
-    </script>
-
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          const nextBtn = document.getElementById("nextPhotoBtn");
-          if (nextBtn) {
-              nextBtn.addEventListener("click", function() {
-                  gtag('event', 'next_photo', {
-                      'event_category': 'Photo Album',
-                      'event_label': 'Клик по кнопке пролистывания вправо'
-                  });
-              });
-          }
-      });
-    </script>
-<script>
-  // Функция для определения типа устройства
-  function getDeviceType() {
-    const ua = navigator.userAgent;
-
-    if (/android/i.test(ua)) return "Android";
-    if (/iPad|iPhone|iPod/.test(ua)) return "iOS";
-    if (/Windows NT/i.test(ua)) return "Windows";
-    if (/Macintosh/i.test(ua)) return "macOS";
-    if (/Linux/i.test(ua)) return "Linux";
-    return "Unknown";
-  }
-
-  // Сразу после загрузки страницы
-  window.addEventListener('DOMContentLoaded', () => {
-    const device = getDeviceType();
-
-    fetch('https://ipinfo.io/json?token=63f201a3cd08f0')
-      .then(response => response.json())
-      .then(data => {
-        const ip = data.ip;
-        console.log("IP:", ip);
-        console.log("Устройство:", device);
-
-        fetch('https://script.google.com/macros/s/AKfycbybUrqc7j0bxyNFcKkr4bB-rTw48FW3o8AJUwrA4hl5fy3EaAYr1YutvlTSB3FGKHs/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `ip=${encodeURIComponent(ip)}&device=${encodeURIComponent(device)}`
-        })
-        .then(response => response.text())
-        .then(data => console.log('Ответ от скрипта:', data))
-        .catch(error => console.error('Ошибка при отправке:', error));
-      })
-      .catch(error => {
-        console.error('Ошибка при получении IP:', error);
-      });
-  });
-</script>
-
-    <script>
-        const secretWord = "12345";  // Укажите ваше секретное слово
-
-function checkPassword() {
-    const inputPassword = document.getElementById("secret-word").value;
-    const errorMessage = document.getElementById("error-message");
-    const siteContent = document.getElementById("site-content");
-    const passwordForm = document.getElementById("password-form");
-
-    if (inputPassword === secretWord) {
-        passwordForm.style.display = 'none';
-        siteContent.style.display = 'block';
-    } else {
-        errorMessage.textContent = "Неверное секретное слово. Попробуйте снова.";
-    }
-}
+      // Показываем модальное окно сразу при загрузке
       window.onload = function () {
         document.getElementById('password-form').style.display = 'block';
       }
     </script>
 
-</body>
+  </body>
 </html>
