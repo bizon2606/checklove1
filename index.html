@@ -182,7 +182,8 @@
               document.body.appendChild(confetti);
           }
       </script>
-  <div class="container">
+<div id="site-content" style="display: none;">
+      <div class="container">
           <!-- -->
           <button class="play-button" onclick="toggleSong()">❚❚ Начать позддравление</button>
  
@@ -402,19 +403,19 @@
     <script>
         const secretWord = "12345";  // Укажите ваше секретное слово
 
-        function checkPassword() {
-            const inputPassword = document.getElementById("secret-word").value;
-            const errorMessage = document.getElementById("error-message");
-            const siteContent = document.getElementById("site-content");
-            const passwordForm = document.getElementById("password-form");
+function checkPassword() {
+    const inputPassword = document.getElementById("secret-word").value;
+    const errorMessage = document.getElementById("error-message");
+    const siteContent = document.getElementById("site-content");
+    const passwordForm = document.getElementById("password-form");
 
-            if (inputPassword === secretWord) {
-                passwordForm.style.display = 'none';
-                siteContent.style.display = 'block';
-            } else {
-                errorMessage.textContent = "Неверное секретное слово. Попробуйте снова.";
-            }
-        }
+    if (inputPassword === secretWord) {
+        passwordForm.style.display = 'none';
+        siteContent.style.display = 'block';
+    } else {
+        errorMessage.textContent = "Неверное секретное слово. Попробуйте снова.";
+    }
+}
     </script>
 
 </body>
